@@ -174,21 +174,7 @@
       
         <p>用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。</p>
 <p>回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。</p>
-<p>求解的程序中，设迷宫入口为maze[1][1]，出口处为maze[m-2][n-2]，入口、出口的值显然为0，任意时刻在迷宫的位置用maze[i][j]表示。<br>从maze[i][j]出发，可以探索的方向有上下左右（北南西东）四个，根据maze[i][j]与相邻位置的关系，用一个数组(依次是东南西北方向)存储maze[i][j]的四个方向上i和j的增量值，通过该增量值表来修改maze[i][j]的位置，例如现在从maze[i][j]向东走一步，则下一位置的坐标就是maze[i+direction[0][0]][j+direction[0][1]]。<br>为了避免走到已经探索过的位置（包括现在探索路径上的和曾经在路径上的位置），凡是探索过的位置都做上记号。一旦某一点maze[i][j]纳入当前路径，就将其赋值为2。用一个栈记录探索路径中当前位置以及在该位置上所选的方向，栈中每个元素有三项：当前位置的行列下标和direction数组的下标值，栈中的元素类型为typedef struct{int x,y,d;}DataType;。</p>
-<p>从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0,1,2,3）。当选定一个可通的方向，即找到下一个位置后，把当前所在的位置纳入到探索路径中，并记录当前所在位置及所选的方向，以便往下走不通时可以顺着原路一步步退回来，每退一步后接着试探在该点上尚未试探过的方向，从下一个位置继续开始探索，如此反复直至到达出口。</p>
-<p>编码时栈直接用了STL中的stack：</p>
-<blockquote>
-<ul>
-<li>构造：stack st;创建一个空栈　　</li>
-<li>stackst1(st2);复制栈<br>　　五个常用操作函数：</li>
-<li>st.top();返回栈顶数据 　</li>
-<li>st.push(element);在栈顶增加element元素 　</li>
-<li>st.pop();弹出栈顶元素 　</li>
-<li>st.empty();判断栈是否为空 　</li>
-<li>st.size();返回栈中元素个数。<br>不用STL的话，用数组模拟栈也是很容易的，用一个top变量记录栈顶。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// the definition of array direction</span><br><span class="line">int direction[4][2]=&#123;&#123;0,1&#125;,&#123;1,0&#125;,&#123;0,-1&#125;,&#123;-1,0&#125;&#125;;</span><br><span class="line"></span><br><span class="line">// definition of element&apos;s data type in the stack</span><br><span class="line">typdef struct &#123;</span><br><span class="line">	int x,y,d;</span><br><span class="line">&#125;DataType;</span><br><span class="line"></span><br><span class="line">void mazePath(int* maze[],int *direction[],int x1,int y1,int x2,int y2,int M,int N)&#123;</span><br><span class="line">/*search one path in the maze[M][N]</span><br><span class="line">  maze[x1][y1] is the entrance of the maze while maze[x2][y2] is the exit of the maze </span><br><span class="line">  1&lt;=x1&lt;x2&lt;=M-2</span><br><span class="line">*/ </span><br><span class="line">	int i,j,k;  // maze[i][j]:current position k:current direction</span><br><span class="line">	int g,h;  // maze[g][h]:next position</span><br><span class="line">	stack&lt;DataType&gt; st;  // stack definition</span><br><span class="line">	DataType element;</span><br><span class="line">	maze[x1][y1] = 2; // add entrance into path</span><br><span class="line">	element.x = x1; element.y=y1;element.d=-1;</span><br><span class="line">	st.push(element); // push entrance into stack</span><br><span class="line">	while(!st.empty())&#123; // while the stack isn&apos;t empty,keep searching</span><br><span class="line">		// get the top element of stack and try every possible direction</span><br><span class="line">		element = st.top();</span><br><span class="line">		st.pop();</span><br><span class="line">		i = element.x; j = element.y; k=element.d+1;</span><br><span class="line">		while(k&lt;=3)&#123; // try all four direction</span><br><span class="line">			g = i+direction[k][0];</span><br><span class="line">			h = j+direction[k][1];</span><br><span class="line">			if(g==x2&amp;&amp;h==y2&amp;&amp;maze[g][h]==0)&#123; // if maze[g][h] is the exit</span><br><span class="line">				// have found the path,print the reverse path</span><br><span class="line">				printf(&quot;the reverse path is : \n&quot;);</span><br><span class="line">				while(!st.empty)&#123; // print all the elements in stack</span><br><span class="line">					element = st.top();</span><br><span class="line">					st.pop();</span><br><span class="line">					printf(&quot;the node is %d %d &quot;,element.x,elment.y);</span><br><span class="line">				&#125;</span><br><span class="line">				return ; // after outputting the path,over the function</span><br><span class="line">			&#125;</span><br><span class="line">			if(maze[g][h]==0)&#123;// maze[g][h] has never been passed by and </span><br><span class="line">			// it isn&apos;t the exit</span><br><span class="line">				maze[g][h] = 2;// mark </span><br><span class="line">				// push current position maze[i][j] and direction into stack</span><br><span class="line">				element.x = i; element.y = j;element.d=k;</span><br><span class="line">				st.push(element);</span><br><span class="line">				i=g;j=h;k=-1;/*update current position to next position in the path*/</span><br><span class="line">			&#125;</span><br><span class="line">			++k;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;The path has not been found.\n&quot;); // hasn&apos;t found the path when the stack is empty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
+<p>求解的程序中，设迷宫入口为maze[1][1]，出口处为maze[m-2][n-2]，入口、出口的值显然为0，任意时刻在迷宫的位置用maze[i][j]表示。<br>从maze[i][j]出发，可以探索的方向有上下左右（北南西东）四个，根据maze[i][j]与相邻位置的关系，用一个数组 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">为了避免走到已经探索过的位置（包括现在探索路径上的和曾经在路径上的位置），凡是探索过的位置都做上记号。一旦某一点maze[i][j]纳入当前路径，就将其赋值为2。用一个栈记录探索路径中当前位置以及在该位置上所选的方向，栈中每个元素有三项：当前位置的行列下标和direction数组的下标值，栈中的元素类型为typedef struct&#123;int x,y,d;&#125;DataType;。</span><br><span class="line"></span><br><span class="line">从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0,1,2,3）。当选定一个可通的方向，即找到下一个位置后，把当前所在的位置纳入到探索路径中，并记录当前所在位置及所选的方向，以便往下走不通时可以顺着原路一步步退回来，每退一步后接着试探在该点上尚未试探过的方向，从下一个位置继续开始探索，如此反复直至到达出口。</span><br><span class="line"></span><br><span class="line">编码时栈直接用了STL中的stack：</span><br><span class="line">&gt;* 构造：stack st;创建一个空栈　　</span><br><span class="line">&gt;* stackst1(st2);复制栈</span><br><span class="line">　　五个常用操作函数：</span><br><span class="line">&gt;* st.top();返回栈顶数据 　</span><br><span class="line">&gt;* st.push(element);在栈顶增加element元素 　</span><br><span class="line">&gt;* st.pop();弹出栈顶元素 　</span><br><span class="line">&gt;* st.empty();判断栈是否为空 　</span><br><span class="line">&gt;* st.size();返回栈中元素个数。</span><br><span class="line">不用STL的话，用数组模拟栈也是很容易的，用一个top变量记录栈顶。</span><br><span class="line">``` </span><br><span class="line">// the definition of array direction</span><br><span class="line">int direction[4][2]=&#123;&#123;0,1&#125;,&#123;1,0&#125;,&#123;0,-1&#125;,&#123;-1,0&#125;&#125;;</span><br><span class="line"></span><br><span class="line">// definition of element&apos;s data type in the stack</span><br><span class="line">typdef struct &#123;</span><br><span class="line">	int x,y,d;</span><br><span class="line">&#125;DataType;</span><br><span class="line"></span><br><span class="line">void mazePath(int* maze[],int *direction[],int x1,int y1,int x2,int y2,int M,int N)&#123;</span><br><span class="line">/*search one path in the maze[M][N]</span><br><span class="line">  maze[x1][y1] is the entrance of the maze while maze[x2][y2] is the exit of the maze </span><br><span class="line">  1&lt;=x1&lt;x2&lt;=M-2</span><br><span class="line">*/ </span><br><span class="line">	int i,j,k;  // maze[i][j]:current position k:current direction</span><br><span class="line">	int g,h;  // maze[g][h]:next position</span><br><span class="line">	stack&lt;DataType&gt; st;  // stack definition</span><br><span class="line">	DataType element;</span><br><span class="line">	maze[x1][y1] = 2; // add entrance into path</span><br><span class="line">	element.x = x1; element.y=y1;element.d=-1;</span><br><span class="line">	st.push(element); // push entrance into stack</span><br><span class="line">	while(!st.empty())&#123; // while the stack isn&apos;t empty,keep searching</span><br><span class="line">		// get the top element of stack and try every possible direction</span><br><span class="line">		element = st.top();</span><br><span class="line">		st.pop();</span><br><span class="line">		i = element.x; j = element.y; k=element.d+1;</span><br><span class="line">		while(k&lt;=3)&#123; // try all four direction</span><br><span class="line">			g = i+direction[k][0];</span><br><span class="line">			h = j+direction[k][1];</span><br><span class="line">			if(g==x2&amp;&amp;h==y2&amp;&amp;maze[g][h]==0)&#123; // if maze[g][h] is the exit</span><br><span class="line">				// have found the path,print the reverse path</span><br><span class="line">				printf(&quot;the reverse path is : \n&quot;);</span><br><span class="line">				while(!st.empty)&#123; // print all the elements in stack</span><br><span class="line">					element = st.top();</span><br><span class="line">					st.pop();</span><br><span class="line">					printf(&quot;the node is %d %d &quot;,element.x,elment.y);</span><br><span class="line">				&#125;</span><br><span class="line">				return ; // after outputting the path,over the function</span><br><span class="line">			&#125;</span><br><span class="line">			if(maze[g][h]==0)&#123;// maze[g][h] has never been passed by and </span><br><span class="line">			// it isn&apos;t the exit</span><br><span class="line">				maze[g][h] = 2;// mark </span><br><span class="line">				// push current position maze[i][j] and direction into stack</span><br><span class="line">				element.x = i; element.y = j;element.d=k;</span><br><span class="line">				st.push(element);</span><br><span class="line">				i=g;j=h;k=-1;/*update current position to next position in the path*/</span><br><span class="line">			&#125;</span><br><span class="line">			++k;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;The path has not been found.\n&quot;); // hasn&apos;t found the path when the stack is empty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -213,81 +199,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/15/迷宫问题-回溯法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-模式匹配-朴素匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/15/模式匹配-朴素匹配/">模式匹配-朴素匹配</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
-  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>算法比较简单，详细思路见注释。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/15/模式匹配-朴素匹配/">展开全文 >></a>
         </p>
       
 
@@ -363,6 +274,81 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/15/模式匹配-KMP快速匹配/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-模式匹配-朴素匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/模式匹配-朴素匹配/">模式匹配-朴素匹配</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
+  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法比较简单，详细思路见注释。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/15/模式匹配-朴素匹配/">展开全文 >></a>
         </p>
       
 
