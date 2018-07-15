@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Hexo</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/模式匹配-朴素匹配/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-15T04:14:43.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,43 +154,134 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-模式匹配-朴素匹配" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
-  	<time datetime="2018-07-15T04:11:35.734Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        </div>
-    	 
-        <div class="article-info info-on-right">
-          
-          
+        <h1 id="模式匹配-朴素匹配"><a href="#模式匹配-朴素匹配" class="headerlink" title="模式匹配-朴素匹配"></a>模式匹配-朴素匹配</h1><p>标签（空格分隔）： 算法数据结构</p>
+<hr>
+<p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法比较简单，详细思路见注释。</p>
 
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/15/模式匹配-朴素匹配/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
+
   
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -209,8 +304,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
