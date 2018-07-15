@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。 　　回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。 　　求解的程序中，设迷宫入口为maze[1][1]，出口处为maze[m-2][n-2]，入口">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T10:15:53.956Z">
+<meta property="og:updated_time" content="2018-07-15T10:19:22.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迷宫问题-回溯法">
 <meta name="twitter:description" content="用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。 　　回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。 　　求解的程序中，设迷宫入口为maze[1][1]，出口处为maze[m-2][n-2]，入口">
@@ -175,7 +175,12 @@
 <blockquote>
 <ul>
 <li>构造：stack st;创建一个空栈　　</li>
-<li>stackst1(st2);复制栈<br>　　五个常用操作函数：</li>
+<li>stackst1(st2);复制栈</li>
+</ul>
+</blockquote>
+<p>　　五个常用操作函数：</p>
+<blockquote>
+<ul>
 <li>st.top();返回栈顶数据 　</li>
 <li>st.push(element);在栈顶增加element元素 　</li>
 <li>st.pop();弹出栈顶元素 　</li>
