@@ -1153,7 +1153,121 @@ mv.Call(args)
 <h2 id="6-Federated存储引擎"><a href="#6-Federated存储引擎" class="headerlink" title="6 Federated存储引擎"></a>6 Federated存储引擎</h2><p>Federated存储引擎表并不存放数据，它只是指向一台远程MySQL数据库服务器上的表，类似于SQL Server的链接服务器和Oracle的透明网关，不同的是当前Federated存储引擎只支持MySQL数据库表，不支持易购数据库表。</p>
 <h2 id="7-Maria存储引擎"><a href="#7-Maria存储引擎" class="headerlink" title="7 Maria存储引擎"></a>7 Maria存储引擎</h2><p>Maria的设计目标是用来取代原有的MyISAM存储引擎，从而成为MySQL的默认存储引擎，它可以看成是MyISAM的后续版本。特点是<strong>缓存数据和索引文件，行锁设计，提供MVCC功能，支持事务和非事务安全的选项支持，更好的BLOB字符类型的处理性能。</strong></p>
 <h2 id="8-其他存储引擎"><a href="#8-其他存储引擎" class="headerlink" title="8 其他存储引擎"></a>8 其他存储引擎</h2><p>上面7种存储之外还有Merge、CSV、Sphinx和Infobright等，它们有各自适用的场景。<br>几个问题的回答：<br>为什么MySQL不支持全文索引？MySQL支持全文索引，MyISAM、Sphinx等存储引擎都支持全文索引。<br>MySQL速度快是因为它不支持事务吗？不是，MySQL中MyISAM存储引擎不支持事务，但是InnoDB支持。速度快要针对不同的应用场景，对于ETL(extract-transform-load, 数据抽取-转换-装载)操作，MyISAM有优势。<br>当表的数据量大于1000W时，MySQL的性能会急剧下降吗？不会，MySQL是数据库，不是文件，随着数据行数的增加，MySQL的性能会有所下降，但是这样的性能下降不是线性的。选择合适的存储引擎和配置，再大的数据量MySQL也能承受。案例：Mytrix在InnoDB上存储了超过1TB的数据；一些网站使用InnoDB存储引擎处理平均每秒800次的插入/更新操作。</p>
-<h1 id="各种存储引擎之间的比较"><a href="#各种存储引擎之间的比较" class="headerlink" title="各种存储引擎之间的比较"></a>各种存储引擎之间的比较</h1><p>存储引擎是MySQL体系结构的核心。<br>不同MySQL存储引擎相关特性比较：<br>|<em>Feature</em>|MyISAM|BDB|Memory|InnoDB|Archive|NDB|<br>|—-|—-|—-|—-|—-|—-|—-|<br>|Storage Limits|No|No|Yes|64TB|No|Yes|<br>|Transactions(commit,rollback,etc.)||Yes||Yes|||<br>|Locking granularity(锁粒度)|Table|Page|Table|Row|Row|Row|<br>|MVCC/Snapshot Read(快照读)||||Yes|Yes|Yes|<br>|Geospatial support(地理空间支持，数据对象定义在几何空间中)|Yes||||||<br>|B-Tree indexes|Yes|Yes|Yes|Yes||Yes|<br>|Hash indexes|||Yes|Yes||Yes|<br>|Full text search index|Yes||||||<br>|Clustered index||||Yes|||<br>|Data Caches|||Yes|Yes||Yes|<br>|Index Caches|Yes||Yes|Yes||Yes|</p>
+<h1 id="各种存储引擎之间的比较"><a href="#各种存储引擎之间的比较" class="headerlink" title="各种存储引擎之间的比较"></a>各种存储引擎之间的比较</h1><p>存储引擎是MySQL体系结构的核心。<br>不同MySQL存储引擎相关特性比较：</p>
+<table>
+<thead>
+<tr>
+<th><em>Feature</em></th>
+<th>MyISAM</th>
+<th>BDB</th>
+<th>Memory</th>
+<th>InnoDB</th>
+<th>Archive</th>
+<th>NDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storage Limits</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>64TB</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Transactions(commit,rollback,etc.)</td>
+<td></td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Locking granularity(锁粒度)</td>
+<td>Table</td>
+<td>Page</td>
+<td>Table</td>
+<td>Row</td>
+<td>Row</td>
+<td>Row</td>
+</tr>
+<tr>
+<td>MVCC/Snapshot Read(快照读)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Geospatial support(地理空间支持，数据对象定义在几何空间中)</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>B-Tree indexes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Hash indexes</td>
+<td></td>
+<td></td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Full text search index</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Clustered index</td>
+<td></td>
+<td></td>
+<td></td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Data Caches</td>
+<td></td>
+<td></td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Index Caches</td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
 <p>MySQL的设计者认为不是所有的应用都需要事务，所以存在不支持事务的存储引擎。可以通过SHOW ENGINES语句查看当前使用的MySQL数据库支持的存储引擎，也可以通过information_schema架构下的ENGINES表来查看。</p>
 
       
