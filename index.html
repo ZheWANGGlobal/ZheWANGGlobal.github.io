@@ -172,14 +172,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　朴素匹配的过程中存在回溯，也就是说当匹配过程中出现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较，对于任何模式```p```，只要能确定```next[i]（i=0...len_p-1）```，就可以实现快速匹配，当```p[i]!=t[j]```时，直接右移```i-next[i]```个字符，若```next[i]&gt;=0```，则```t[j]```与```p[next[i]]```继续比较，否则从```t[j+1]```与```p[0]```继续比较，理解透彻需要花一点时间，实现如下：</span><br></pre></td></tr></table></figure></p>
+        <p>朴素匹配的过程中存在回溯，也就是说当匹配过程中出现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较，对于任何模式```p```，只要能确定```next[i]（i=0...len_p-1）```，就可以实现快速匹配，当```p[i]!=t[j]```时，直接右移```i-next[i]```个字符，若```next[i]&gt;=0```，则```t[j]```与```p[next[i]]```继续比较，否则从```t[j+1]```与```p[0]```继续比较，理解透彻需要花一点时间，实现如下：</span><br></pre></td></tr></table></figure></p>
 <p>// 快速匹配函数<br>int pMatch(char<em> p,char</em> t,int len_p,int len_t){<br>// t是目标串，p是模式串<br>    int i,j; // i记录p的当前匹配位置，j记录t<br>    i=0 ;j=0; // initialize<br>    while( i&lt;len_p &amp;&amp; j&lt;len_t){<br>    //循环停止条件：模式串能正确匹配到串末或目标串匹配结束，匹配失败<br>        if(p[i]==t[j]||i==-1){ // 考虑next[i]为-1的情况<br>            ++i;++j;  // 继续向后匹配<br>        }else{//下次匹配时，t串从匹配失败的字符开始，p串从next[i]的位置开始<br>            i=next[i];<br>        }<br>    }</p>
 <pre><code>if(i&gt;=len_p)  return j-len_p+1;  // 匹配成功，返回p[0]在t中的位置
 else return 0;
 </code></pre><p>}// next[i]存放的是p[0]…p[i-1]这个字符串中最长相同前后缀子串的长度</p>
 <p>　　执行过程中，j只增不减，j++最多执行len_t次，i++语句最多执行也不超过len_t次，时间代价O(len_t)<br>　　快速匹配的关键在next数组的计算：<br>// 计算next[]数组<br>void makeNext(char<em> p,int len_p,int</em> next){<br>    int i=0,k=-1;  // i指向p当前字符，k是记录next数组中元素的值<br>    next[0]=-1;  // p[0]和t[j]比较不相等，下次仍从p[0]开始比较<br>    while(i &lt; len_p-1 ) { // 计算next[i+1]<br>        while(k&gt;=0 &amp;&amp; p[i]!=p[k])  // next[i]&lt;i,next[k]是p[0]…p[k]最长相同前后缀计算<br>            k=next[k];<br>        i++;k++;<br>        next[i]=k;<br>        /<em><br>            if(p[i]==p[k])  next[i] = next[k];<br>            else next[i]=k;
         </em>/<br>    }<br>}</p>
-<p><code>`</code><br>　　每执行一次外层循环，i严格增1，故外层循环正好执行len_p-1次，k的值从-1开始k+len_p-1次，并且只有在这一语句中k被增值。在内层循环中，k=next[k]至少使k减少1，所以整个算法中该语句执行次数累计不超过len_p-1次，故内层循环总执行次数最大为m-1。计算next数组的执行时间是O(len_p)。算法总计算时间为O(len_p_+len_t)，相比暴力优化了很多。</p>
+<p><code>`</code><br>每执行一次外层循环，i严格增1，故外层循环正好执行len_p-1次，k的值从-1开始k+len_p-1次，并且只有在这一语句中k被增值。在内层循环中，k=next[k]至少使k减少1，所以整个算法中该语句执行次数累计不超过len_p-1次，故内层循环总执行次数最大为m-1。计算next数组的执行时间是O(len_p)。算法总计算时间为O(len_p_+len_t)，相比暴力优化了很多。</p>
 
       
 
