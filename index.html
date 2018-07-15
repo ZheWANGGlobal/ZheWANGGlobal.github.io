@@ -1199,6 +1199,153 @@
 
 
   
+    <article id="post-CSS居中" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/29/CSS居中/">CSS居中</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/29/CSS居中/" class="archive-article-date">
+  	<time datetime="2016-12-29T14:36:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<ul>
+<li>margin：0 auto;　:　作用于子元素，是margin:0 auto 0 auto的缩写，用于水平居中，起作用的前提是子元素没有被float影响。</li>
+<li>text-align:center　:　用于文本水平居中对齐，针对父元素，前提是子元素没有被float影响。</li>
+<li>line-height　:　本用于设置行间的距离（行高），调整它的值可以用于文本的垂直居中，作用于父元素，当它的值等于父元素的height时，内部文字就会自动垂直居中。</li>
+<li>position　：　元素居中时使用，几乎无后遗症，缺点是元素必须有确定的宽高值。先将父元素设置好height和width并写上position：　relative（以免给子元素写上position：absolute的时候错位），再设置子元素的height和width，同时给子元素写上top：50%；left：50；margin-top：-height/2（height值一半取负）；margin-left：-width/2(width值一半取负)；代码形如这样：　　{position:absolute;left:50%;top:50%;width:80px;height:40px;margin-left:40px;margin-top:20px;}</li>
+</ul>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/29/CSS居中/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-移动网页基本meta设置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/25/移动网页基本meta设置/">移动网页基本meta设置</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/25/移动网页基本meta设置/" class="archive-article-date">
+  	<time datetime="2016-10-25T14:27:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.　<figure class="highlight plain"><figcaption><span>name</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minimum-scale=1.0, maximum-scale=1.0,user-scalable=no&quot; /&gt;&lt;/xmp&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li>viewport：手机浏览器是把页面放在一个虚拟窗口（viewport）中，通常viewpoint比屏幕宽，让用户可以通过平移和缩放查看网页。移动端的浏览器用viewport这个meta tag让网页开发者来控制viewport的大小和缩放。<br>content属性值：</li>
+<li>width：可视区域的宽度，值为数值或关键词device-width ；</li>
+<li>height：可视区域高度，同width ； </li>
+<li>initial-scale：页面首次被显示时可视区域的缩放级别，取值1.0则按页面时间尺寸显示，无缩放 ；</li>
+<li>minimum-scale，maximum-scale：可视区域的缩放级别，值为1.0将禁止用户放大到实际尺寸之上 ；</li>
+<li>user-scalable：是否可对页面进行缩放，no禁止缩放 。</li>
+</ul>
+</blockquote>
+<p>2.　<figure class="highlight plain"><figcaption><span>name</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　作用是方便搜索引擎对网页的检索。</span><br><span class="line"></span><br><span class="line">3.　```&lt;xmp&gt;&lt;meta name=&quot;format-detection&quot; content=&quot;telephone=no&quot; /&gt;&lt;/xmp&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　电话号码不被显示为拨号的超链接</p>
+<p>4.　<figure class="highlight plain"><figcaption><span>name</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　网页开启对web app的支持</span><br><span class="line"></span><br><span class="line">5.　```&lt;xmp&gt;&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black-translucent&quot; /&gt;&lt;/xmp&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　在web app应用下状态条（屏幕顶部条）的颜色，默认值为default（白色），可为black和black-translucent（灰色半透明），值为black-translucent时，会占据页面px位置，浮于页面上方（覆盖页面一定px的高度）。这个状态条就是手机等顶部显示时间啊电池电量等信息的条。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/25/移动网页基本meta设置/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
 
 
