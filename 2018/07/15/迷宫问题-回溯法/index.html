@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>迷宫问题-回溯法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="构造：stack st;创建一个空栈　　 stackst1(st2);复制栈　　五个常用操作函数： st.top();返回栈顶数据 　 st.push(element);在栈顶增加element元素 　 st.pop();弹出栈顶元素 　 st.empty();判断栈是否为空 　 st.size();返回栈中元素个数。不用STL的话，用数组模拟栈也是很容易的，用一个top变量记录栈顶。1234">
+  <meta name="description" content="用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。 回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。 从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0">
 <meta name="keywords" content="算法数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="迷宫问题-回溯法">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/迷宫问题-回溯法/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="构造：stack st;创建一个空栈　　 stackst1(st2);复制栈　　五个常用操作函数： st.top();返回栈顶数据 　 st.push(element);在栈顶增加element元素 　 st.pop();弹出栈顶元素 　 st.empty();判断栈是否为空 　 st.size();返回栈中元素个数。不用STL的话，用数组模拟栈也是很容易的，用一个top变量记录栈顶。1234">
+<meta property="og:description" content="用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。 回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。 从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T10:02:47.264Z">
+<meta property="og:updated_time" content="2018-07-15T10:04:05.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迷宫问题-回溯法">
-<meta name="twitter:description" content="构造：stack st;创建一个空栈　　 stackst1(st2);复制栈　　五个常用操作函数： st.top();返回栈顶数据 　 st.push(element);在栈顶增加element元素 　 st.pop();弹出栈顶元素 　 st.empty();判断栈是否为空 　 st.size();返回栈中元素个数。不用STL的话，用数组模拟栈也是很容易的，用一个top变量记录栈顶。1234">
+<meta name="twitter:description" content="用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。 回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。 从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,7 +175,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
+        <p>用二维数组maze[m][n]表示迷宫，数组中元素是0表示通道，元素是1表示墙，问题：求一条从入口到出口的无环路径。</p>
+<p>回溯法求解：从入口出发，沿着某一个方向进行探索，若能走通，则继续向前走；否则沿原路返回，换一个方向再进行探索，直到找到一个出口，或者所有可能的探索都以失败告终。思路与DFS一致。</p>
+<p>从入口开始，对每个当前位置都从东方向开始试探，若不能通过，则顺时针依次试探南、西、北方向（d依次等于0,1,2,3）。当选定一个可通的方向，即找到下一个位置后，把当前所在的位置纳入到探索路径中，并记录当前所在位置及所选的方向，以便往下走不通时可以顺着原路一步步退回来，每退一步后接着试探在该点上尚未试探过的方向，从下一个位置继续开始探索，如此反复直至到达出口。</p>
+<p>编码时栈直接用了STL中的stack：</p>
+<blockquote>
 <ul>
 <li>构造：stack st;创建一个空栈　　</li>
 <li>stackst1(st2);复制栈<br>　　五个常用操作函数：</li>
