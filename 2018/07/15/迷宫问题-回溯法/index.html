@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>迷宫问题-回溯法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// the definition of array directionint direction[4][2]=&amp;#123;&amp;#123;0,1&amp;#125;,&amp;#123;1,0&amp;#125;,&amp;#123;0,-1&amp;#1">
+<meta name="keywords" content="算法数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迷宫问题-回溯法">
 <meta property="og:url" content="http://yoursite.com/2018/07/15/迷宫问题-回溯法/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// the definition of array directionint direction[4][2]=&amp;#123;&amp;#123;0,1&amp;#125;,&amp;#123;1,0&amp;#125;,&amp;#123;0,-1&amp;#1">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T09:57:55.816Z">
+<meta property="og:updated_time" content="2018-07-15T09:59:41.133Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="迷宫问题-回溯法">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// the definition of array directionint direction[4][2]=&amp;#123;&amp;#123;0,1&amp;#125;,&amp;#123;1,0&amp;#125;,&amp;#123;0,-1&amp;#1">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,9 +158,25 @@
             <article id="post-迷宫问题-回溯法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      迷宫问题-回溯法
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/迷宫问题-回溯法/" class="archive-article-date">
+  	<time datetime="2018-07-15T09:36:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">// the definition of array direction</span><br><span class="line">int direction[4][2]=&#123;&#123;0,1&#125;,&#123;1,0&#125;,&#123;0,-1&#125;,&#123;-1,0&#125;&#125;;</span><br><span class="line"></span><br><span class="line">// definition of element&apos;s data type in the stack</span><br><span class="line">typdef struct &#123;</span><br><span class="line">	int x,y,d;</span><br><span class="line">&#125;DataType;</span><br><span class="line"></span><br><span class="line">void mazePath(int* maze[],int *direction[],int x1,int y1,int x2,int y2,int M,int N)&#123;</span><br><span class="line">/*search one path in the maze[M][N]</span><br><span class="line">  maze[x1][y1] is the entrance of the maze while maze[x2][y2] is the exit of the maze </span><br><span class="line">  1&lt;=x1&lt;x2&lt;=M-2</span><br><span class="line">*/ </span><br><span class="line">	int i,j,k;  // maze[i][j]:current position k:current direction</span><br><span class="line">	int g,h;  // maze[g][h]:next position</span><br><span class="line">	stack&lt;DataType&gt; st;  // stack definition</span><br><span class="line">	DataType element;</span><br><span class="line">	maze[x1][y1] = 2; // add entrance into path</span><br><span class="line">	element.x = x1; element.y=y1;element.d=-1;</span><br><span class="line">	st.push(element); // push entrance into stack</span><br><span class="line">	while(!st.empty())&#123; // while the stack isn&apos;t empty,keep searching</span><br><span class="line">		// get the top element of stack and try every possible direction</span><br><span class="line">		element = st.top();</span><br><span class="line">		st.pop();</span><br><span class="line">		i = element.x; j = element.y; k=element.d+1;</span><br><span class="line">		while(k&lt;=3)&#123; // try all four direction</span><br><span class="line">			g = i+direction[k][0];</span><br><span class="line">			h = j+direction[k][1];</span><br><span class="line">			if(g==x2&amp;&amp;h==y2&amp;&amp;maze[g][h]==0)&#123; // if maze[g][h] is the exit</span><br><span class="line">				// have found the path,print the reverse path</span><br><span class="line">				printf(&quot;the reverse path is : \n&quot;);</span><br><span class="line">				while(!st.empty)&#123; // print all the elements in stack</span><br><span class="line">					element = st.top();</span><br><span class="line">					st.pop();</span><br><span class="line">					printf(&quot;the node is %d %d &quot;,element.x,elment.y);</span><br><span class="line">				&#125;</span><br><span class="line">				return ; // after outputting the path,over the function</span><br><span class="line">			&#125;</span><br><span class="line">			if(maze[g][h]==0)&#123;// maze[g][h] has never been passed by and </span><br><span class="line">			// it isn&apos;t the exit</span><br><span class="line">				maze[g][h] = 2;// mark </span><br><span class="line">				// push current position maze[i][j] and direction into stack</span><br><span class="line">				element.x = i; element.y = j;element.d=k;</span><br><span class="line">				st.push(element);</span><br><span class="line">				i=g;j=h;k=-1;/*update current position to next position in the path*/</span><br><span class="line">			&#125;</span><br><span class="line">			++k;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;The path has not been found.\n&quot;); // hasn&apos;t found the path when the stack is empty</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -195,6 +215,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
