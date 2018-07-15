@@ -6,19 +6,31 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>分治法 | Zhe Wang</title>
+  <title>深入Web请求过程 | Zhe Wang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
+  <meta name="description" content="互联网的网络架构由C/S架构转变为B/S架构B/S架构的好处： 客户端使用统一的浏览器（Browser）。不需要特殊的配置和网络连接就可以使用所有服务提供商提供的服务。同时也方便了用户的使用。 服务端（Server）基于统一的HTTP。C/S架构使用自定义应用层协议，B/S架构使用统一的HTTP协议。使用统一的HTTP协议减少了服务提供商的开发成本。基于HTTP的服务器（如Apache、IIS、N">
+<meta name="keywords" content="Java-Web">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分治法">
-<meta property="og:url" content="http://yoursite.com/2017/05/10/分治法/index.html">
+<meta property="og:title" content="深入Web请求过程">
+<meta property="og:url" content="http://yoursite.com/2018/02/09/深入Web请求过程/index.html">
 <meta property="og:site_name" content="Zhe Wang">
-<meta property="og:description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
+<meta property="og:description" content="互联网的网络架构由C/S架构转变为B/S架构B/S架构的好处： 客户端使用统一的浏览器（Browser）。不需要特殊的配置和网络连接就可以使用所有服务提供商提供的服务。同时也方便了用户的使用。 服务端（Server）基于统一的HTTP。C/S架构使用自定义应用层协议，B/S架构使用统一的HTTP协议。使用统一的HTTP协议减少了服务提供商的开发成本。基于HTTP的服务器（如Apache、IIS、N">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T10:34:28.695Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/CDN%20Framework.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/time%20cost%20for%20request%20resources%20from%20server.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/HTTP%20request%20message.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/HTTP%20response%20message.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/request%20header%20without%20using%20ctrl%20F5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/request%20header%20using%20ctrl%20F5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/ipconfig-all.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/DNS%20domain%20name%20resolution.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/trace%20the%20process%20of%20domain%20name%20resolution.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/ipconfig-flushdns.png">
+<meta property="og:updated_time" content="2018-07-15T15:36:45.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分治法">
-<meta name="twitter:description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
+<meta name="twitter:title" content="深入Web请求过程">
+<meta name="twitter:description" content="互联网的网络架构由C/S架构转变为B/S架构B/S架构的好处： 客户端使用统一的浏览器（Browser）。不需要特殊的配置和网络连接就可以使用所有服务提供商提供的服务。同时也方便了用户的使用。 服务端（Server）基于统一的HTTP。C/S架构使用自定义应用层协议，B/S架构使用统一的HTTP协议。使用统一的HTTP协议减少了服务提供商的开发成本。基于HTTP的服务器（如Apache、IIS、N">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/CDN%20Framework.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Zhe Wang" type="application/atom+xml">
   
@@ -146,40 +158,293 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-分治法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-深入Web请求过程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      分治法
+      深入Web请求过程
     </h1>
   
 
         
-        <a href="/2017/05/10/分治法/" class="archive-article-date">
-  	<time datetime="2017-05-10T10:29:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
+        <a href="/2018/02/09/深入Web请求过程/" class="archive-article-date">
+  	<time datetime="2018-02-09T15:35:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序可以看作把原问题分成两个子问题，一个是规模为1的问题，另一个是规模为n-1的问题，算法时间复杂度O(n^2)；而归并排序把原问题分成两个大小为n/2的问题，算法的时间复杂度为O(nlog2n)级。</p>
-<h1 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h1><p>　　分治策略是将问题分成较小的与原问题同类型的子问题，对子问题的处理过程与对原问题的处理过程相同。所以分治发处理问题的算法可以自然地写成一个递归过程。<br>一个用分治法编写的过程通常包括基值处理部分（把问题分到足够小后要进行的处理），分解问题的部分，递归调用部分和合并处理部分。对于一些具体的问题，某些部分彼此之间可能并无明显界限，可能相互渗透，可能合为一部分。但递归调用部分明显地区别于其他部分。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">return_type divideAndConquer(objArray *p,int i , int j)&#123;</span><br><span class="line">　　int tempInt;</span><br><span class="line">　　if(simple(p,i,j)) return solve(p,i,j);</span><br><span class="line">　　temp = divide(p,i,j);</span><br><span class="line">　　return (combine(divideAndConquer(p,i,temp-1),divideAndConquer(p,temp,j)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>　　算法框架中要处理的对象以某数组（objArray）的形式存放，函数divideAndConquer()有三个输入参数：p,i,j。p是指向对象的指针，i、j是对象数组的两个下标，表明了函数处理对象的范围，函数divideAndConquer()首先调用了抽象函数simple(p,i,j)，它的功能是检查由i、j确定的问题规模足够小，如果足够小，则可以直接调用solve(p,i,j)函数得到简单情况的解；否则调用函数divide(p,i,j)，将问题规模划小，得到划分的中间下标用tempInt暂时保存，然后对两个子问题分别递归调用divideAndConquer(p,i,temp-1)和divideAndConquer(p,temp,j)，最后调用combine函数将两个解合并，得到原问题的解。假设op是实际处理对象的指针，对象数组的元素个数为n，在调用程序中执行函数调用divideAndConquer(op,0,n-1)可得到所求的解。</p>
-<h1 id="分治法应用"><a href="#分治法应用" class="headerlink" title="分治法应用"></a>分治法应用</h1><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序:-"></a>快速排序:-</h2><p>每趟把一个元素放入排完序后它所应在的位置，这个位置把原数组分成两个宏观有序的子数组。</p>
-<h3 id="思想"><a href="#思想" class="headerlink" title="思想:"></a>思想:</h3><p>　　在待排序的n个元素中任取一个元素（通常取第一个元素）为分区标准，把所有小于该排序码的元素移到左边，把所有大于该排序码的元素移到右边，中间放所选的元素，这一整个过程称为一次排序；然后，对前后两个子序列分别重复上述过程，直到所有元素都排好序。<br>　　第一趟快速排序的具体流程：设置变量i指向参加排序的数组中第一个位置0，变量j指向参加排序的数组中最后一个位置n-1.首先保存元素array[0]，使得array[0]为空出的位置（空位在前一区），这时，令j向前扫描，寻找小于array[0]的元素，假设找到的元素是array[j]，将元素array[j]移到当前空位中；这时array[j]成为空位（空位在后一区），再令i自i+1起向后扫描，寻找大于array[0]排序码的元素，假设找到的元素是array[i]，将array[i]移到当前空位中，空位又到了前一区，然后再令j自j-1起向前扫描。如此交替改变扫描方向，从两端向中间靠拢，直到i=j，这是i（j）所指的位置为array[0]的最终位置。快速排序的记录移动次数不大于比较次数，所以，快速排序的最坏时间复杂度为O(n^2)，最好时间复杂度为O(nlog2n)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void quickSort(int* array,int l,int r)&#123;</span><br><span class="line">　　int i,j,t,temp;</span><br><span class="line">　　if(l&gt;r) return ; // 只有一个记录或者无记录，则无须排序</span><br><span class="line">　　i=l;j=r;temp=array[i]; // temp中保存的即为基准数</span><br><span class="line">　　while(i!=j)&#123;//寻找array[l]的最终位置</span><br><span class="line"></span><br><span class="line">　　while(array[j]&gt;=temp &amp;&amp; i&lt;j) --j;// 先从右往左扫描，查找第一个排序码小于temp的数</span><br><span class="line">　　while(array[i]&lt;=temp &amp;&amp; i&lt;j) ++i; // 再从左往右扫描，查找第一个排序码大于temp的数</span><br><span class="line"></span><br><span class="line">　　// 交换两个两个数在数组中的位置</span><br><span class="line">　　if(i&lt;j)&#123; t = array[i]; array[i] = array[j]; array[j] = t; &#125; &#125; // 最终将基准数归位，找到array[l]的位置</span><br><span class="line">　　 array[left] = array[i]; </span><br><span class="line">　　array[i] = temp; </span><br><span class="line">　　quickSort(array,l,i-1);//递归处理左区间 </span><br><span class="line">　　quickSort(array,i+1,r); //递归处理右区间 </span><br><span class="line">　　return; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>　　为改善最坏情况下的时间性能，可以采用三者取中规则，即在每一趟划分前，首先比较array[l]、array[r]和array[(l+r)/2]的大小，取中间的元素和array[l]交换。快速排序平均时间复杂度T(n)=O(nlog2n)，需要一个栈空间实现递归，栈大小取决与递归调用的深度，最多不超过n，若每次都选较大的部分进栈，处理较短的部分，则递归深度最多不超过log2n。快排不稳定，左右交换过程中无法保证原来相同排序码元素的相对位置不变。</p>
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序:-"></a>归并排序:-</h1><p>把规模为n的问题分成规模为[n/2]的两个子问题。</p>
-<h3 id="主要思想："><a href="#主要思想：" class="headerlink" title="主要思想："></a>主要思想：</h3><p>　　把待排序的数组分成若干子数组，先将每个子数组内的元素排序，再将已排序的子数组合并，得到完全排序的数组。合并时开始只要比较各子数组第一个元素的排序码，排序码最小的元素为排序后的第一个元素，取出该元素，继续比较各子数组的第一个元素，找出排序后的第二个元素，如此反复，经过一次扫描，得到排序结果。<br>两组归并算法:设array[low]到array[m]和array[m+1]到array[high]是存在同一个数组中且相邻的两个有序的子数组，两组归并算法将它们合并为一个有序的数组，并存在array1[low]到array1[high]中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void merge(int* array,int* array1,int low,int m,int high)&#123;</span><br><span class="line">　　int i,j,k;</span><br><span class="line">　　i=low;j=m+1;k=low;</span><br><span class="line">　　while((i&lt;=m)&amp;&amp;(j&lt;=high))&#123;// 从两个有序文件中的第一个元素中选出小的元素</span><br><span class="line">　　　　if(array[i]&lt;=array[j]) array1[k++] = array[i++];</span><br><span class="line">　　　　else array1[k++]=array[j++];</span><br><span class="line">　　&#125;</span><br><span class="line">　　while(i&lt;=m) array1[k++]=array[i++];// 复制第一个数组的剩余元素</span><br><span class="line">　　while(j&lt;=high) array1[k++]=array[j++];// 复制第二个数组的剩余元素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一趟归并的算法：设各子数组长度为length（最后一个子数组长度可能小于length），则array[0]到array[n-1]中共有n/length（向上取整）个有序的子数组，它们分别为：从array[0]到array[length-1]，从array[length]到array[2<em>length-1],…,最后一个是从array[(n/length(向上取整)-1)</em>length]到array[n-1]。在一趟归并中反复调用上面定义的merge操作，将相邻的一对对子数组归并。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 对array做一趟归并，结果放在array1中</span><br><span class="line">void mergePass(int* array,int* array1,int n ,int length)&#123;</span><br><span class="line">// length 为本趟归并的有序子文件的长度</span><br><span class="line">　　int i=0,j;</span><br><span class="line">　　while(i+2*length-1&lt;n)&#123;</span><br><span class="line">　　　　merge(array,array1,i,i+length-1,i+2*length-1);//归并长度为length的两个子数组</span><br><span class="line">　　　　i+=2*length;</span><br><span class="line">　　&#125;</span><br><span class="line">　　if(i+length-1&lt;n-1)&#123;// 剩下两个子数组，其中一个长度小于length</span><br><span class="line">　　　　merge(array,array1,i,i+length-1,n-1);</span><br><span class="line">　　&#125;else&#123;</span><br><span class="line">　　　　for(j=i;j&lt;n;++j)　array1[j]=array[j];// 将最后一个子数组复制到数组array1</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>二路归并算法：多次调用一趟归并过程，每趟归并欧有序子文件的长度length扩大一倍。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void mergeSort(int* array,int n)&#123;</span><br><span class="line">　　int length=1;</span><br><span class="line">　　while(len&lt;n)&#123; </span><br><span class="line">　　　mergePass(); </span><br><span class="line">　　　length*=2;</span><br><span class="line">　　　mergePass();</span><br><span class="line">　　　length*=2;</span><br><span class="line">　　&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>　　第i趟归并后，有序子数组长度为2^i，所以具有n个记录的数组排序，必须做log2n（向上取整）趟归并，每趟归并所花费的时间是O(n),二路归并排序算法的时间复杂度为O(nlog2n)。算法中增加了一个数组record，算法的辅助空间为O(n)，二路归并排序是稳定的。</p>
+        <h2 id="互联网的网络架构由C-S架构转变为B-S架构"><a href="#互联网的网络架构由C-S架构转变为B-S架构" class="headerlink" title="互联网的网络架构由C/S架构转变为B/S架构"></a>互联网的网络架构由C/S架构转变为B/S架构</h2><h3 id="B-S架构的好处："><a href="#B-S架构的好处：" class="headerlink" title="B/S架构的好处："></a>B/S架构的好处：</h3><ol>
+<li>客户端使用统一的浏览器（Browser）。不需要特殊的配置和网络连接就可以使用所有服务提供商提供的服务。同时也方便了用户的使用。</li>
+<li>服务端（Server）基于统一的HTTP。C/S架构使用自定义应用层协议，B/S架构使用统一的HTTP协议。使用统一的HTTP协议减少了服务提供商的开发成本。基于HTTP的服务器（如Apache、IIS、Nginx、Tomcat、Jboss）和开发服务的通用框架有很多，使得服务开发者开发成本降低。</li>
+</ol>
+<h2 id="1-B-S网络架构"><a href="#1-B-S网络架构" class="headerlink" title="1 B/S网络架构"></a>1 B/S网络架构</h2><p>大多数C/S互联网应用程序使用<strong>长连接</strong>交互模式，而B/S采用应用层的HTTP来交互数据，HTTP采用无状态的<strong>短连接</strong>方式，即通常情况下，一次请求就完成了一次数据交互，也就是完成了一个业务逻辑，完成之后这次通信连接就断开了。</p>
+<p><strong>采用短连接的目的</strong>是能够同时服务更多用户，互联网应用每天会处理上亿次用户请求，不可能每个用户访问一次后一直保持这个连接。</p>
+<p><strong>用户在浏览器中输入<a href="http://www.taobao.com这个URL之后，发生了哪些操作？" target="_blank" rel="noopener">www.taobao.com这个URL之后，发生了哪些操作？</a></strong><br>首先浏览器请求DNS服务器将域名解析为对应的IP地址；<br>然后浏览器根据IP地址找到互联网上对应的服务器，向服务器发送一个get请求；<br>服务器端的服务器可能有很多台，负载均衡(Load Balance)服务器收到get请求后来平均分配所有的用户请求，指定到底哪台服务器来处理请求；<br>指定的服务器收到请求后根据请求的数据所在的位置（可能存储在分布式缓存中、静态文件中或是数据库中）返回数据资源给用户；<br>浏览器收到返回的数据后，浏览器解析数据，如果发现数据中有一些静态资源（如CSS、JS或图片），则浏览器又会发起另外的HTTP请求，这些请求很可能会在CDN（content delivery network，内容分发网络，通过在网络各处放置节点服务器，实时的根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上，使得用户可以就近取得所需的内容，解决网络拥挤状况，提高网站响应速度。）上，CDN服务器再处理这个用户请求。</p>
+<p>CDN架构图：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/CDN%20Framework.jpg" alt="CDN架构图"></p>
+<p>不管上面的网络结构如何变化，一些始终遵循的固定原则：</p>
+<ol>
+<li>互联网上所有资源都要用一个URL表示。</li>
+<li>必须基于HTTP与服务端交互。不管访问的数据是在国内的还是在国外，是文本数据还是流媒体（传输过程中使用了流技术的多媒体数据，流技术即把连续的影像和声音信息经过压缩处理后放到网站服务器让用户一边下载一边观看收听，不需要将整个压缩文件都下载下来后才可以使用的网络传输技术），都必须按照统一的HTTP请求的方式，这样服务器端才能正确得知请求的是什么。</li>
+<li>数据的展示必须在浏览器中进行。当用户获取到请求的数据资源后，必须在浏览器上最终解析展示。</li>
+</ol>
+<p>##2 如何发起一个HTTP请求<br>发起一个HTTP请求的过程就是建立一个Socket通信的过程。</p>
+<p>##3 HTTP解析<br>HTTP是B/S架构的核心。要理解HTTP，最重要的是要熟悉HTTP中的<strong>HTTP Header</strong>。</p>
+<p><strong>什么是HTTP协议？</strong><br>HTTP(hypertext transfer protocol，<strong>超文本传输协议</strong>)协议定义了浏览器向WWW服务器<strong>请求数据</strong>以及服务器向浏览器<strong>返回数据</strong>的方法。HTTP协议使用了面向连接的<strong>TCP作为运输层协议</strong>，保证数据的可靠传输，HTTP不考虑数据在传输过程中被丢弃后又怎样重传。<strong>HTTP协议本身是无连接的。</strong>即虽然HTTP使用了TCP连接，但是通信的双方在交换HTTP报文之前不需要先建立HTTP连接。<strong>HTTP协议是无状态的。</strong>即同一个用户第二次访问同一个服务器上的资源时，服务器的响应与第一次被访问时的相同（假定请求的数据在服务器上没有更新）。因为服务器不需要记录曾经请求数据的用户信息，也不需记录为该用户返回过几次数据，所以HTTP的无状态特点简化了服务器的设计，使得服务器更容易支持大量并发的HTTP请求。</p>
+<p>当浏览器向服务器发送get请求时，HTTP协议规定首先要建立浏览器与服务器之间的TCP连接。这样的连接过程需要三次握手，当三次握手的前两部分完成后（即经过一个RTT（round-trip time,往返时间，表示从发送方发送数据开始，到发送方收到来自接收方的确认总共经历的时间，其间接收方收到数据后立刻发送确认）时间后），浏览器就把HTTP请求报文作为三次握手的第三个报文的数据发送给服务器。服务器收到HTTP请求之后，就把所请求的文档作为响应报文返回给客户。<br>请求一个WWW资源所需的时间是<strong>该资源的传输时间（与资源的大小成正比）加上两倍的RTT（一个RTT用于建立TCP连接，另一个RTT用于请求和接受资源）</strong>。这里TCP建立连接的三次握手的第三个报文段中捎带了浏览器对WWW资源的请求。</p>
+<p>请求服务器资源所需时间:<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/time%20cost%20for%20request%20resources%20from%20server.jpg" alt="请求服务器资源所需时间"></p>
+<p><strong>HTTP报文结构</strong><br>HTTP有两类报文：请求报文与响应报文<br>HTTP是面向文本的（text-oriented），报文中的每一个字段都是一些ASCII码串，因此各个字段的长度都是不确定的。<br>HTTP请求报文和响应报文都是由<strong>三部分</strong>组成（两种报文的区别是报文的开始行不同）：<br>（1）<strong>开始行（start-line）</strong>，用于区分是请求报文还是响应报文。请求报文中的开始行叫做请求行（request line），响应报文中的开始行叫做状态行（status line）。开始行的三个字段之间都以空格分隔开，最后的CR与LF分别代表回车与换行。<br>（2）<strong>首部行（message-header）</strong>，用来说明浏览器、服务器和报文主体的一些信息。首部可以有好几行，也可以不使用。每一个首部行中有首部字段名和对应的值，每一行以回车和换行结束。整个首部行结束时，还有一空行将首部行与实体主体分开。<br>（3）<strong>报文主体（message-body）</strong>，请求报文中一般不使用这个字段，在响应报文中也可能不使用</p>
+<p><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html" target="_blank" rel="noopener">HTTP Message</a>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">generic-message = start-line</span><br><span class="line">                  *(message-header CRLF)</span><br><span class="line">                  CRLF</span><br><span class="line">                  [ message-body ]</span><br><span class="line">start-line      = Request-Line | Status-Line</span><br></pre></td></tr></table></figure></p>
+<p>HTTP请求报文（request message）结构与响应报文（response message）结构：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/HTTP%20request%20message.png" alt="HTTP request message"><br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/HTTP%20response%20message.png" alt="HTTP response message"></p>
+<p>HTTP请求报文的请求行由三项内容组成：方法（操作）、请求资源的URL、以及HTTP的版本。</p>
+<p><strong>HTTP请求报文的一些方法：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法（操作）</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OPTION</td>
+<td>请求一些选项的信息</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>请求读取由URL所标志的信息</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>请求由读取URL所标志的信息的首部</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>为服务器添加信息</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>在指明的URL下存储下一个资源</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除指明的URL所标志的资源</td>
+</tr>
+<tr>
+<td>TRACE</td>
+<td>用来进行环回测试的请求报文</td>
+</tr>
+<tr>
+<td>CONNECT</td>
+<td>用于代理服务器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见HTTP请求头:</strong></p>
+<table>
+<thead>
+<tr>
+<th>请求头</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept-Charset</td>
+<td>用于指定客户端接受的字符集</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>用于指定可接受的内容的编码，如Accept-Encoding:gzip.deflate</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>用于指定一种自然语言，如Accept-Language:zh-cn</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>用于指定被请求资源的Internet主机和端口号，如Host:<a href="http://www.taobao.com" target="_blank" rel="noopener">www.taobao.com</a></td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>客户端将它的操作系统、浏览器和其他属性告诉服务器</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>当前连接是否保持，如Connection：Keep-Alive</td>
+</tr>
+</tbody>
+</table>
+<p>HTTP响应报文的状态行包括三项内容，即HTTP的版本，状态码，以及解释状态码的简单短语。<br>状态码（status-code）由三位数字组成，分为5大类共33种（见<a href="https://tools.ietf.org/html/rfc2616#section-10" target="_blank" rel="noopener">RFC2616</a>）:<br><strong>1xx</strong>：表示通知信息，如请求已经收到或正在处理<br><strong>2xx</strong>：表示成功（Successful）<br><strong>3xx</strong>：表示重定向（Redirection），如要完成请求还必须采取进一步的行动<br><strong>4xx</strong>：表示客户端错误（client error），如400客户端请求有语法错误，不能被服务器识别<br><strong>5xx</strong>：表示服务端错误（server error），如500服务器内部错误，服务器发生了意料之外的错误情况导致服务器不能满足客户端发来的请求</p>
+<p><strong>常见的HTTP状态码：</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>客户端请求成功</td>
+</tr>
+<tr>
+<td>301</td>
+<td>Moved permanently(请求的资源被永久转移)，跳转的地址通过Location指定</td>
+</tr>
+<tr>
+<td>302</td>
+<td>临时跳转(请求的资源被临时转移)，跳转的地址通过Location指定</td>
+</tr>
+<tr>
+<td>400</td>
+<td>客户端有语法错误，不能被服务器识别</td>
+</tr>
+<tr>
+<td>403</td>
+<td>服务器收到请求，但是拒绝提供服务</td>
+</tr>
+<tr>
+<td>404</td>
+<td>请求的资源不存在</td>
+</tr>
+<tr>
+<td>500</td>
+<td>服务器发生不可预期的错误</td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见的HTTP响应头：</strong></p>
+<table>
+<thead>
+<tr>
+<th>响应头</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server</td>
+<td>使用的服务器名称，如Server:Apache/1.3.6(Unix)</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>用来指明发送给接受者的实体正文的媒体类型，如Content-Type:text/html;charset=GBK</td>
+</tr>
+<tr>
+<td>Content-Encoding</td>
+<td>与请求报头Accept-Encoding对应，告诉浏览器服务器用的是什么压缩编码</td>
+</tr>
+<tr>
+<td>Content-Language</td>
+<td>描述了资源所用的自然语言，与Accept-Language对应</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>指明实体正文的长度，用以字节方式存储的十进制数字来表示</td>
+</tr>
+<tr>
+<td>Keep-Alive</td>
+<td>保持连接的时间，如Keep-Alive：timeout=5,max=120</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-浏览器缓存机制"><a href="#3-2-浏览器缓存机制" class="headerlink" title="3.2 浏览器缓存机制"></a>3.2 浏览器缓存机制</h3><p>当我们浏览一个页面发现有异常情况时，通常考虑的就是是不是浏览器做了缓存，一般的做法是使用ctrl+F5组合键来重新请求该页面，重新请求的最新的页面。ctrl+F5组合键可以保证浏览器会直接向目标URL发送请求而不使用浏览器缓存的数据；同时当我们使用ctrl+F5来刷新页面时，<strong>HTTP的请求头中会增加一些请求头</strong>，<strong>这些请求头用于告诉服务端我们要获取最新的数据而不是缓存</strong>，这样可以避免请求发送到服务端时访问到的是服务端缓存的数据（例如应用服务器的前端部署了一个缓存服务器，如Varnish代理，Varnish可能直接使用缓存数据）</p>
+<p><strong>使用ctrl+F5组合键后HTTP请求头会发生什么改变</strong><br>使用ctrl+F5组合键后HTTP请求头中会增加两个请求项：Pragma:no-cache和Cache-Control:no-cache。</p>
+<p>未使用ctrl F5组合键的HTTP请求头：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/request%20header%20without%20using%20ctrl%20F5.png" alt="request header without using ctrl F5"></p>
+<p>使用了ctrl F5组合键的HTTP请求头：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/request%20header%20using%20ctrl%20F5.png" alt="request header using ctrl F5"></p>
+<h4 id="3-2-1-Cache-control和Pragma两项配置项的作用"><a href="#3-2-1-Cache-control和Pragma两项配置项的作用" class="headerlink" title="3.2.1 Cache-control和Pragma两项配置项的作用"></a>3.2.1 Cache-control和Pragma两项配置项的作用</h4><p>该两项HTTP Head字段用于指定所有缓存机制在整个请求/响应链中必须服从的指令。</p>
+<p><strong>HTTP head字段的可选值：</strong></p>
+<table>
+<thead>
+<tr>
+<th>可选值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public</td>
+<td>所有内容都将被缓存，在响应头中设置</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>内容只缓存到私有缓存中，在响应头中设置</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td>所有内容都不会被缓存，在请求头中和响应头中设置</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>所有内容都不会被缓存到缓存或者Internet临时文件中，在响应头中设置</td>
+</tr>
+<tr>
+<td>must-revalidation/proxy-revalidation</td>
+<td>如果缓存的内容失效，请求必须发送到服务器/代理以进行重新验证，在请求头中设置</td>
+</tr>
+<tr>
+<td>max-age=xxx</td>
+<td>缓存的内容将在xxx秒后失效，这个选项只在HTTP1.1中可用，和Last-Modified一起使用时优先级较高，在响应头中设置</td>
+</tr>
+</tbody>
+</table>
+<p>Cache-Control请求字段被各个浏览器支持得较好，且它的优先级较高，当Cache-Control和其他请求字段（如Expires）同时出现时，Cache-Control会覆盖其他字段。<br>Pragma字段的作用和Cache-Control类似，也是在HTTP头中包含的一个特殊的指令，对服务器的行为做一个规约，最常用的是Pragma:no-cache，与Cache-Control:no-cache的作用一样。</p>
+<h4 id="3-2-2-Expires"><a href="#3-2-2-Expires" class="headerlink" title="3.2.2 Expires"></a>3.2.2 Expires</h4><p>Expires通常使用的格式是Expires后面跟一个日期和时间，如Expires:Sat,25 Feb 2012 12:22:17 GMT，表示的意义是超过这个时间，缓存的内容就会失效。浏览器在发出请求之前会检查该页面的这个字段，如果缓存的内容已经失效，即该页面已经过期，就会重新向服务器发起请求。</p>
+<h4 id="3-2-3-Last-Modified-Etag"><a href="#3-2-3-Last-Modified-Etag" class="headerlink" title="3.2.3 Last-Modified/Etag"></a>3.2.3 Last-Modified/Etag</h4><p>Last-Modified 字段一般用于表示一个服务器上的资源的最后修改时间。服务器在响应头中返回一个Last-Modified字段，告诉该浏览器的最后修改时间，如Last-Modified:Sat,25 Feb 2012 12:55:04 GMT，浏览器再次发送请求时在请求头中添加字段If-Modified-Since:SatSat,25 Feb 2012 12:55:04，询问当前缓存的页面是否是最新的，如果是最新的返回304状态码，告诉浏览器缓存的页面是最新的，服务器也不会返回最新的数据。<br>Etag字段的功能与Last-Modified字段类似，该字段的作用是让服务器给每一个页面分配一个唯一的编号，通过这个编号来确定缓存的页面是否是最新的。该方式比Last-Modified更加灵活，缺点是当后端的Web服务器有多台时，需要每个Web服务器都记住网站的所有资源，否则浏览器返回的这个编号就失去了存在的意义。</p>
+<h2 id="4-DNS域名解析"><a href="#4-DNS域名解析" class="headerlink" title="4 DNS域名解析"></a>4 DNS域名解析</h2><p>互联网都是通过域名来发布和请求资源，但是不同计算机之间是通过IP地址来建立网络连接。DNS解析就是将URL中的域名需要解析成IP地址。</p>
+<p><strong>4.1 DNS域名解析过程:</strong><br>当一个用户在浏览器中输入网站域名并按下回车键后，DNS解析有近10个步骤：<br><strong>第一步：</strong>浏览器检查缓存中是否有该域名解析过的IP地址，如果有，则DNS解析过程结束。浏览器中缓存的域名对应的IP地址的大小和时间都是有限制的，通常时间在几分钟到几小时不等，可以通过TTL属性（time to live，记录域名解析结果在DNS服务器上的保留时间）对浏览器中缓存的域名对应的IP地址的存在时间进行设置。缓存时间不宜太长或者太短，如果太长，一旦域名被解析到的IP地址有变化，浏览器中缓存的IP地址即失效，会导致该域名不能正常解析，用户无法正常访问网站；如果缓存的时间太短，会导致用户每次访问网站都要重新解析一次域名，缓存的意义不再。</p>
+<p><strong>第二步：</strong>如果浏览器中没有该域名对应的解析过的IP地址缓存，则浏览器会检查操作系统的hosts文件。操作系统中的hosts文件缓存了一些域名对应的DNS解析结果。如果hosts文件中指定了一个域名的IP地址，那么浏览器会首先使用这个IP地址。这样的做法带来的好处：我们在网站测试过程中可以把域名解析到一台测试服务器上，这样我们不需要修改任何代码就能测试到单独服务器上代码的业务逻辑是否正确；这样的做法带来的坏处：本地DNS解析的过程可能被黑客利用，黑客可以通过修改本地的域名解析来把特定的域名解析到他指定的IP地址，导致域名劫持。<br>Windows系统中该本地配置文件的地址在C:\Windows\System32\drivers\etc\hosts，Linux系统中该文件的地址在/etc/hosts，当操作系统解析到这个配置文件中的域名时，操作系统会在缓存中缓存这个解析结果，缓存的时间受该域名的失效时间和缓存的空间大小控制。</p>
+<p><strong>第一步和第二步的域名解析过程都是在本机完成的，在本机中无法完成的域名解析，就会请求域名服务器来解析该域名。</strong></p>
+<p>第三步：当上面两步无法完成域名解析时，操作系统会把该域名发送给本地区域名服务器，即LDNS，网络配置中的“DNS服务器地址”这一项就设置了LDNS的地址。LDNS在本地互联网中，如果是学校中接入互联网，则所属的LDNS服务器肯定在学校里，如果是在小区中接入电信或移动（SPA,service provider ）互联网，则所属的LDNS服务器通常会在城市中不远处的某处。LDNS服务器缓存了域名解析的结果，缓存的时间受域名的失效时间控制，缓存空间不足是域名解析不成功的主要因素。LDNS的性能通常会很好，它承担了域名解析的主要工作，80%的域名解析到这里就完成了。<strong>Windows下可以通过ipconfig/all查看LDNS服务器的地址，Linux下可以通过cat /etc/resolv.conf查看。</strong><br>Windows中查看DNS server地址：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/ipconfig-all.png" alt="ipconfig/all"></p>
+<p><strong>第四步：</strong>如果LDNS仍然没有命中请求的域名，则直接到Root Server根域名服务器请求解析。</p>
+<p><strong>第五步：</strong>根域名服务器返回给本地域名服务器一个所查询域的主域名服务器（gTLD Server, generic top-level domain，通用顶级域）地址。gTLD是国际顶级域名服务器，如.com、.cn、.org等。</p>
+<p><strong>第六步：</strong>本地区域名服务器LDNS再向上一步返回的gTLD服务器发送请求。</p>
+<p><strong>第七步：</strong>接受请求的gTLD服务器查找并返回此域名对应的Name Server域名服务器的地址，这个Name Server通常就是注册的域名服务器，例如在某个域名服务提供商申请的域名，则该域名解析任务就由这个域名提供商的服务器来完成。</p>
+<p><strong>第八步：</strong> Name Server域名服务器会查询存储的域名和IP的映射关系表，在正常的情况下都根据域名得到的IP地址，连通一个TTL值返回给DNS Server域名服务器。</p>
+<p><strong>第九步：</strong>返回该域名对应的IP和TTL值，LDNS服务器会缓存这个域名和IP地址的对应关系，缓存的时间由TTL控制。</p>
+<p><strong>第十步：</strong>把解析的结果返回给用户，用户根据TTL值将结果缓存在本地的系统缓存中，域名解析过程结束。</p>
+<p>在实际的DNS解析过程中，可能会超过上述10个步骤，如Name Server可能有多级，或者有一个GTM（global traffic manager，全球流量管理器，一种负载均衡组件）来负载均衡控制，这都可能影响域名解析的过程。</p>
+<p>DNS域名解析过程：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/DNS%20domain%20name%20resolution.png" alt="DNS domain name resolution"></p>
+<p><strong>4.2 跟踪域名解析过程</strong><br>在Linux和Windows下都可以使用nslookup命令来查询域名解析结果；在Linux下还可以使用dig 域名来查询DNS的解析过程。<br>Windows命令行下使用nslookup来查看域名解析结果：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/trace%20the%20process%20of%20domain%20name%20resolution.png" alt="using nslookup using windows"></p>
+<p><strong>4.3清除缓存的域名</strong><br>DNS域名解析后会在Local DNS Server和本机上缓存解析结果，这两个缓存都是由TTL值和缓存空间的大小控制的，最大缓存时间即TTL值。Local DNS Server的缓存时间就是TTL值，很难人工介入来进行更改。本机缓存可以进行人工清除。</p>
+<p>本机缓存的清除方法：<br>在Windows的命令行中使用ipconfig/flushdns命令来刷新缓存。<br>在Linux下可以使用/etc/init.d/nscd restart来清除缓存。<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/ipconfig-flushdns.png" alt="ipconfig/flushdns"></p>
+<p><strong>在Java应用中，JVM也会缓存DNS的解析结果，这个缓存是在InetAddress类中完成的，</strong>这个缓存时间较为特殊，有两种缓存策略：一种是正确解析结果缓存，另一种是失败的解析结果缓存。这两个缓存时间由两个配置项控制，配置项是在%JAVA_HOME%\lib\security\java.security文件中配置的。两个配置项分别是networkaddress.cache.ttl和networkaddress.cache.negative.ttl，它们的默认值分别是-1（永不失效）和10（缓存10秒）。<br><strong>要修改这两个值有如下几种方式，分别是：</strong>直接修改java.security文件中的默认值；在Java的启动参数（运行程序是加上JVM参数）中增加-Dsun.net.inetaddr.ttl=xxx来修改默认值；通过InetAddress类动态修改。<br><strong>需要特别注意的是，如果我们使用InetAddress类解析域名，必须是单例模式，不然会有严重的性能问题，如果每次都创建InetAddress实例，则每次都要进行一次完整的域名解析，非常耗时。</strong></p>
+<p><strong>4.4 几种域名解析方式</strong><br>域名解析记录主要分为<strong>A记录、MX记录、CNAME记录、NS记录和TXT记录</strong>。</p>
+<blockquote>
+<ul>
+<li><strong>A记录：A代表Address，用来指定域名对应的IP地址。</strong>如将item.taobao.com指定到115.238.23.xxx，将switch.taobao.com指定到121.14.24.xxx。A记录可以将多个域名解析到一个IP地址，但不能将一个域名解析到多个IP地址。</li>
+<li><strong>MX记录：MX代表Mail Exchange，</strong>就是可以将某个域名下的邮件服务器指向自己的Mail Server，如taobao.com域名的A记录IP地址是115.238.25.xxx，如果将MX记录设置为115.238.25.xxx，即<a href="mailto:xxx@taobao.com" target="_blank" rel="noopener">xxx@taobao.com</a>的邮件路由，DNS会将邮件发送到115.238.25.xxx所在的服务器，同时正常通过Web请求的话仍然能解析到A记录的IP地址。</li>
+<li><strong>CNAME记录：全程是Canonical name(别名解析)。</strong>所谓的别名解析就是可以为一个域名设置一个或多个别名。即将域名指向另一个域名，再通过另一个域名提供IP地址。</li>
+<li><strong>NS记录：域名服务器记录。</strong>意义是为某个域名指定DNS解析服务器，也就是这个域名由指定的IP地址的DNS服务器去解析。如果需要把子域名交给其他DNS服务商解析，就需要添加NS记录。</li>
+<li><strong>TXT记录：</strong>为某个主机名或者域名设置说明，该项可以填写任何东西，长度限制255。</li>
+</ul>
+</blockquote>
+<h2 id="5-CDN工作机制"><a href="#5-CDN工作机制" class="headerlink" title="5 CDN工作机制"></a>5 CDN工作机制</h2><p>CDN即<strong>content delivery network内容分布网络</strong>，是构筑在现有Internet上的一种先进的流量分配网络，其目的是通过在现有的Internet中添加一层新的网络架构，将网站的内容发布到最接近用户的网络“边缘”，使得用户可以就近取得所需的内容，提高用户访问网站时网站的响应速度。CDN=镜像（mirror）+缓存（cache）+整体负载均衡（GSLB），可以明显提高Internet中信息流动的效率。<br>目前CDN都以缓存网站中的静态数据为主，如CSS、JS、图片和静态页面等数据。用户在从主站服务器请求到动态的内容后，再从CDN上下载这些静态数据，从而加速网页数据内容的下载速度，如淘宝有90%以上的数据都是由CDN来提供的。</p>
+<p>通常来说CDN要达到以下几个目标：</p>
+<blockquote>
+<ul>
+<li><strong>可扩展（Scalability）。</strong>性能可扩展性：应对新增的大量数据、用户和事务的扩展能力。成本可扩展性：用低廉的运营成本提供动态的服务能力和高质量的内容分发。</li>
+<li><strong>安全性（Security）。</strong>强调提供物理设备、网络、软件、数据和服务过程中的安全性，减少因为DDoS攻击（distributed denial of service，分布式拒绝服务攻击，将多个计算机联合起来作为攻击平台以成倍提高拒绝服务攻击的威力。拒绝服务攻击即使目标主机停止提供服务，常见方法有迫使被攻击的服务器缓冲区满，不接受新的请求（带宽攻击）或使用IP欺骗，影响网站的正常访问）或者其他恶意行为造成商业网站的业务中断。</li>
+<li><strong>可靠性、响应和执行（reliability、responsiveness和performance）。</strong>服务可用性指能够处理可能的故障和用户体验下降的问题，通过负载均衡及时提供网络的容错机制。</li>
+</ul>
+</blockquote>
+<p><strong>5.1 CDN架构</strong><br>一个用户访问某个静态文件（如CSS文件），这个静态文件的域名假如为cdn.taobao.com，那么首先要向Local DNS服务器发起请求，一般经过迭代解析之后回到这个域名的注册服务器去解析，一般每个公司都会有一个DNS解析服务器。这时这个DNS解析器通常会把它重新CNAME解析到另一个域名，而这个域名最终会被指向CDN全局中的DNS负载均衡服务器（CDN Server的负载均衡），在由这个GTM来最终分配是哪个地方的访问用户，返回给离这个地方最近的CDN节点。<br>拿到这个DNS解析结果，用户就会直接去这个CDN节点访问该静态文件，如果该节点中请求的文件不存在，则会再到源站去获取该文件，然后再返回给用户。</p>
+<p><strong>5.2 负载均衡</strong><br>负载均衡（Load Balance）指将工作任务进行平衡，将其分摊到多个操作单元上执行，如图片服务器、应用服务器等，共同完成工作任务。可以提高服务器响应速度及利用效率；避免软件或者硬件模块出现单点失效；解决网络拥塞问题；实现地理位置无关性；为用户提供稳定的网站访问质量。</p>
+<p>三种常见的负载均衡架构：链路负载均衡、集群负载均衡和操作系统负载均衡。这几种负载均衡不仅在CDN架构中能使用，在Web服务或者分布式数据集群中同样也能使用。</p>
+<blockquote>
+<ul>
+<li><strong>链路负载均衡：</strong>通过DNS解析成不同的IP，用户根据IP来访问不同的目标服务器。此时负载均衡是由DNS的解析来完成的，用户最终访问哪个Web Server是由DNS Server来控制的，在这里就是由Global DNS Server来动态解析域名服务。这种DNS解析的优点是用户会直接访问目标服务器而不要经过其他的代理服务器，通常访问速度会更快；缺点是由于DNS在用户本地和LDNS服务器都有缓存，一旦某台Web Server挂掉，很难及时更新用户的域名解析结果，导致用户无法访问该域名的网站。</li>
+<li><strong>集群负载均衡：</strong>分为硬件负载均衡和软件负载均衡。<br>硬件负载均衡采用一台专门的硬件设备来转发请求，硬件负载均衡的关键就在于这太价格非常昂贵的请求分发设备，如F5，为了安全通常需要一主一备。硬件负载均衡的优点是性能非常好，缺点是请求分发设备价格非常贵，一般公司用不起，还有就是当访问量突然爆发式增长超出服务极限时，不能进行动态扩容。<br>软件负载均衡是最为广泛使用的一种负载均衡方式，特点是使用成本非常低，直接使用廉价的PC就可以搭建，缺点是一般一次访问请求要经过多次代理服务器，会增加网络响应时间。</li>
+<li><strong>操作系统负载均衡:</strong>就是利用操作系统级别的软件中断或者硬件中断来达到负载均衡，如可以设置多队列网卡等实现。</li>
+</ul>
+</blockquote>
+<p><strong>5.3 CDN动态加速</strong><br>CDN动态加速的原理是在CDN的DNS解析中通过动态的链路探测来寻找最好的一条路径，然后通过DNS的调度将所有请求调度到选定的这条路径上回源，从而提高用户的访问速度，是当前较为流行的一种优化技术。<br>由于CDN节点是遍布全国，所以用户接入一个CDN节点后，可以选择一条从离用户最近的CDN节点到源站链路最好的路径让用户走。一条简单的方法是在每个CDN节点上从源站下载一个一定大小的文件，看哪条链路总耗时最短，这样可以构成一个链路链表，然后绑定到DNS解析上，更新到CDN的Local DNS。当然选取最佳链路不能只看总耗时，也要考虑增加了的网络带宽的成本以及网络链路安全的因素。</p>
 
       
 
@@ -219,6 +484,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Java-Web</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -269,7 +545,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/05/10/分治法/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/02/09/深入Web请求过程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,18 +559,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/05/21/White-Box-Testing-Logical-Coverage/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/15/MySQL体系结构和存储引擎/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          White Box Testing-Logical Coverage
+          MySQL体系结构和存储引擎
         
       </div>
     </a>
   
   
-    <a href="/2017/04/02/Paxos/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Paxos</div>
+    <a href="/2017/06/15/迷宫问题-回溯法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">迷宫问题-回溯法</div>
       <i class="icon-circle-right"></i>
     </a>
   

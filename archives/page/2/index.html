@@ -6,19 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>分治法 | Zhe Wang</title>
+  <title>Archives | Zhe Wang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
-<meta property="og:type" content="article">
-<meta property="og:title" content="分治法">
-<meta property="og:url" content="http://yoursite.com/2017/05/10/分治法/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Zhe Wang">
+<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
 <meta property="og:site_name" content="Zhe Wang">
-<meta property="og:description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T10:34:28.695Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分治法">
-<meta name="twitter:description" content="分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序">
+<meta name="twitter:title" content="Zhe Wang">
   
     <link rel="alternative" href="/atom.xml" title="Zhe Wang" type="application/atom+xml">
   
@@ -146,187 +142,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-分治法" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      分治法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/10/25/移动网页基本meta设置/" class="archive-article-date">
+  	<time datetime="2016-10-25T14:27:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-25</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2016/10/25/移动网页基本meta设置/">移动网页基本meta设置</a>
     </h1>
   
 
-        
-        <a href="/2017/05/10/分治法/" class="archive-article-date">
-  	<time datetime="2017-05-10T10:29:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　分治法（Divide and Conquer）是把一个规模为n的问题分成两个或多个较小的与原问题类型相同的子问题，分而治之，通过对子问题的求解，将子问题的解合并起来从而构造出整个问题的解。如果子问题的规模仍然相当大，可以对子问题重复应用分治策略。分治策略把问题分成若干个子问题，分成的子问题的数目一般不大。如果每次分成的各子问题的规模相等或者近乎相等，则分治效率较高，否则较低。例如：直接插入排序可以看作把原问题分成两个子问题，一个是规模为1的问题，另一个是规模为n-1的问题，算法时间复杂度O(n^2)；而归并排序把原问题分成两个大小为n/2的问题，算法的时间复杂度为O(nlog2n)级。</p>
-<h1 id="算法框架"><a href="#算法框架" class="headerlink" title="算法框架"></a>算法框架</h1><p>　　分治策略是将问题分成较小的与原问题同类型的子问题，对子问题的处理过程与对原问题的处理过程相同。所以分治发处理问题的算法可以自然地写成一个递归过程。<br>一个用分治法编写的过程通常包括基值处理部分（把问题分到足够小后要进行的处理），分解问题的部分，递归调用部分和合并处理部分。对于一些具体的问题，某些部分彼此之间可能并无明显界限，可能相互渗透，可能合为一部分。但递归调用部分明显地区别于其他部分。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">return_type divideAndConquer(objArray *p,int i , int j)&#123;</span><br><span class="line">　　int tempInt;</span><br><span class="line">　　if(simple(p,i,j)) return solve(p,i,j);</span><br><span class="line">　　temp = divide(p,i,j);</span><br><span class="line">　　return (combine(divideAndConquer(p,i,temp-1),divideAndConquer(p,temp,j)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>　　算法框架中要处理的对象以某数组（objArray）的形式存放，函数divideAndConquer()有三个输入参数：p,i,j。p是指向对象的指针，i、j是对象数组的两个下标，表明了函数处理对象的范围，函数divideAndConquer()首先调用了抽象函数simple(p,i,j)，它的功能是检查由i、j确定的问题规模足够小，如果足够小，则可以直接调用solve(p,i,j)函数得到简单情况的解；否则调用函数divide(p,i,j)，将问题规模划小，得到划分的中间下标用tempInt暂时保存，然后对两个子问题分别递归调用divideAndConquer(p,i,temp-1)和divideAndConquer(p,temp,j)，最后调用combine函数将两个解合并，得到原问题的解。假设op是实际处理对象的指针，对象数组的元素个数为n，在调用程序中执行函数调用divideAndConquer(op,0,n-1)可得到所求的解。</p>
-<h1 id="分治法应用"><a href="#分治法应用" class="headerlink" title="分治法应用"></a>分治法应用</h1><h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序:-"></a>快速排序:-</h2><p>每趟把一个元素放入排完序后它所应在的位置，这个位置把原数组分成两个宏观有序的子数组。</p>
-<h3 id="思想"><a href="#思想" class="headerlink" title="思想:"></a>思想:</h3><p>　　在待排序的n个元素中任取一个元素（通常取第一个元素）为分区标准，把所有小于该排序码的元素移到左边，把所有大于该排序码的元素移到右边，中间放所选的元素，这一整个过程称为一次排序；然后，对前后两个子序列分别重复上述过程，直到所有元素都排好序。<br>　　第一趟快速排序的具体流程：设置变量i指向参加排序的数组中第一个位置0，变量j指向参加排序的数组中最后一个位置n-1.首先保存元素array[0]，使得array[0]为空出的位置（空位在前一区），这时，令j向前扫描，寻找小于array[0]的元素，假设找到的元素是array[j]，将元素array[j]移到当前空位中；这时array[j]成为空位（空位在后一区），再令i自i+1起向后扫描，寻找大于array[0]排序码的元素，假设找到的元素是array[i]，将array[i]移到当前空位中，空位又到了前一区，然后再令j自j-1起向前扫描。如此交替改变扫描方向，从两端向中间靠拢，直到i=j，这是i（j）所指的位置为array[0]的最终位置。快速排序的记录移动次数不大于比较次数，所以，快速排序的最坏时间复杂度为O(n^2)，最好时间复杂度为O(nlog2n)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">void quickSort(int* array,int l,int r)&#123;</span><br><span class="line">　　int i,j,t,temp;</span><br><span class="line">　　if(l&gt;r) return ; // 只有一个记录或者无记录，则无须排序</span><br><span class="line">　　i=l;j=r;temp=array[i]; // temp中保存的即为基准数</span><br><span class="line">　　while(i!=j)&#123;//寻找array[l]的最终位置</span><br><span class="line"></span><br><span class="line">　　while(array[j]&gt;=temp &amp;&amp; i&lt;j) --j;// 先从右往左扫描，查找第一个排序码小于temp的数</span><br><span class="line">　　while(array[i]&lt;=temp &amp;&amp; i&lt;j) ++i; // 再从左往右扫描，查找第一个排序码大于temp的数</span><br><span class="line"></span><br><span class="line">　　// 交换两个两个数在数组中的位置</span><br><span class="line">　　if(i&lt;j)&#123; t = array[i]; array[i] = array[j]; array[j] = t; &#125; &#125; // 最终将基准数归位，找到array[l]的位置</span><br><span class="line">　　 array[left] = array[i]; </span><br><span class="line">　　array[i] = temp; </span><br><span class="line">　　quickSort(array,l,i-1);//递归处理左区间 </span><br><span class="line">　　quickSort(array,i+1,r); //递归处理右区间 </span><br><span class="line">　　return; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>　　为改善最坏情况下的时间性能，可以采用三者取中规则，即在每一趟划分前，首先比较array[l]、array[r]和array[(l+r)/2]的大小，取中间的元素和array[l]交换。快速排序平均时间复杂度T(n)=O(nlog2n)，需要一个栈空间实现递归，栈大小取决与递归调用的深度，最多不超过n，若每次都选较大的部分进栈，处理较短的部分，则递归深度最多不超过log2n。快排不稳定，左右交换过程中无法保证原来相同排序码元素的相对位置不变。</p>
-<h1 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序:-"></a>归并排序:-</h1><p>把规模为n的问题分成规模为[n/2]的两个子问题。</p>
-<h3 id="主要思想："><a href="#主要思想：" class="headerlink" title="主要思想："></a>主要思想：</h3><p>　　把待排序的数组分成若干子数组，先将每个子数组内的元素排序，再将已排序的子数组合并，得到完全排序的数组。合并时开始只要比较各子数组第一个元素的排序码，排序码最小的元素为排序后的第一个元素，取出该元素，继续比较各子数组的第一个元素，找出排序后的第二个元素，如此反复，经过一次扫描，得到排序结果。<br>两组归并算法:设array[low]到array[m]和array[m+1]到array[high]是存在同一个数组中且相邻的两个有序的子数组，两组归并算法将它们合并为一个有序的数组，并存在array1[low]到array1[high]中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void merge(int* array,int* array1,int low,int m,int high)&#123;</span><br><span class="line">　　int i,j,k;</span><br><span class="line">　　i=low;j=m+1;k=low;</span><br><span class="line">　　while((i&lt;=m)&amp;&amp;(j&lt;=high))&#123;// 从两个有序文件中的第一个元素中选出小的元素</span><br><span class="line">　　　　if(array[i]&lt;=array[j]) array1[k++] = array[i++];</span><br><span class="line">　　　　else array1[k++]=array[j++];</span><br><span class="line">　　&#125;</span><br><span class="line">　　while(i&lt;=m) array1[k++]=array[i++];// 复制第一个数组的剩余元素</span><br><span class="line">　　while(j&lt;=high) array1[k++]=array[j++];// 复制第二个数组的剩余元素</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一趟归并的算法：设各子数组长度为length（最后一个子数组长度可能小于length），则array[0]到array[n-1]中共有n/length（向上取整）个有序的子数组，它们分别为：从array[0]到array[length-1]，从array[length]到array[2<em>length-1],…,最后一个是从array[(n/length(向上取整)-1)</em>length]到array[n-1]。在一趟归并中反复调用上面定义的merge操作，将相邻的一对对子数组归并。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 对array做一趟归并，结果放在array1中</span><br><span class="line">void mergePass(int* array,int* array1,int n ,int length)&#123;</span><br><span class="line">// length 为本趟归并的有序子文件的长度</span><br><span class="line">　　int i=0,j;</span><br><span class="line">　　while(i+2*length-1&lt;n)&#123;</span><br><span class="line">　　　　merge(array,array1,i,i+length-1,i+2*length-1);//归并长度为length的两个子数组</span><br><span class="line">　　　　i+=2*length;</span><br><span class="line">　　&#125;</span><br><span class="line">　　if(i+length-1&lt;n-1)&#123;// 剩下两个子数组，其中一个长度小于length</span><br><span class="line">　　　　merge(array,array1,i,i+length-1,n-1);</span><br><span class="line">　　&#125;else&#123;</span><br><span class="line">　　　　for(j=i;j&lt;n;++j)　array1[j]=array[j];// 将最后一个子数组复制到数组array1</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>二路归并算法：多次调用一趟归并过程，每趟归并欧有序子文件的长度length扩大一倍。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void mergeSort(int* array,int n)&#123;</span><br><span class="line">　　int length=1;</span><br><span class="line">　　while(len&lt;n)&#123; </span><br><span class="line">　　　mergePass(); </span><br><span class="line">　　　length*=2;</span><br><span class="line">　　　mergePass();</span><br><span class="line">　　　length*=2;</span><br><span class="line">　　&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>　　第i趟归并后，有序子数组长度为2^i，所以具有n个记录的数组排序，必须做log2n（向上取整）趟归并，每趟归并所花费的时间是O(n),二路归并排序算法的时间复杂度为O(nlog2n)。算法中增加了一个数组record，算法的辅助空间为O(n)，二路归并排序是稳定的。</p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃软糖:P<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/paytome_alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/paytome_wechat.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/05/10/分治法/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/05/21/White-Box-Testing-Logical-Coverage/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          White Box Testing-Logical Coverage
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/04/02/Paxos/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Paxos</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -350,8 +211,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
