@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/DNS%20domain%20name%20resolution.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/trace%20the%20process%20of%20domain%20name%20resolution.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/ipconfig-flushdns.png">
-<meta property="og:updated_time" content="2018-07-15T15:36:45.762Z">
+<meta property="og:updated_time" content="2018-07-15T15:40:37.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入Web请求过程">
 <meta name="twitter:description" content="互联网的网络架构由C/S架构转变为B/S架构B/S架构的好处： 客户端使用统一的浏览器（Browser）。不需要特殊的配置和网络连接就可以使用所有服务提供商提供的服务。同时也方便了用户的使用。 服务端（Server）基于统一的HTTP。C/S架构使用自定义应用层协议，B/S架构使用统一的HTTP协议。使用统一的HTTP协议减少了服务提供商的开发成本。基于HTTP的服务器（如Apache、IIS、N">
@@ -184,7 +184,7 @@
 </ol>
 <h2 id="1-B-S网络架构"><a href="#1-B-S网络架构" class="headerlink" title="1 B/S网络架构"></a>1 B/S网络架构</h2><p>大多数C/S互联网应用程序使用<strong>长连接</strong>交互模式，而B/S采用应用层的HTTP来交互数据，HTTP采用无状态的<strong>短连接</strong>方式，即通常情况下，一次请求就完成了一次数据交互，也就是完成了一个业务逻辑，完成之后这次通信连接就断开了。</p>
 <p><strong>采用短连接的目的</strong>是能够同时服务更多用户，互联网应用每天会处理上亿次用户请求，不可能每个用户访问一次后一直保持这个连接。</p>
-<p><strong>用户在浏览器中输入<a href="http://www.taobao.com这个URL之后，发生了哪些操作？" target="_blank" rel="noopener">www.taobao.com这个URL之后，发生了哪些操作？</a></strong><br>首先浏览器请求DNS服务器将域名解析为对应的IP地址；<br>然后浏览器根据IP地址找到互联网上对应的服务器，向服务器发送一个get请求；<br>服务器端的服务器可能有很多台，负载均衡(Load Balance)服务器收到get请求后来平均分配所有的用户请求，指定到底哪台服务器来处理请求；<br>指定的服务器收到请求后根据请求的数据所在的位置（可能存储在分布式缓存中、静态文件中或是数据库中）返回数据资源给用户；<br>浏览器收到返回的数据后，浏览器解析数据，如果发现数据中有一些静态资源（如CSS、JS或图片），则浏览器又会发起另外的HTTP请求，这些请求很可能会在CDN（content delivery network，内容分发网络，通过在网络各处放置节点服务器，实时的根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上，使得用户可以就近取得所需的内容，解决网络拥挤状况，提高网站响应速度。）上，CDN服务器再处理这个用户请求。</p>
+<p><strong>用户在浏览器中输入 <a href="http://www.taobao.com" target="_blank" rel="noopener">www.taobao.com</a> 这个URL之后，发生了哪些操作？</strong><br>首先浏览器请求DNS服务器将域名解析为对应的IP地址；<br>然后浏览器根据IP地址找到互联网上对应的服务器，向服务器发送一个get请求；<br>服务器端的服务器可能有很多台，负载均衡(Load Balance)服务器收到get请求后来平均分配所有的用户请求，指定到底哪台服务器来处理请求；<br>指定的服务器收到请求后根据请求的数据所在的位置（可能存储在分布式缓存中、静态文件中或是数据库中）返回数据资源给用户；<br>浏览器收到返回的数据后，浏览器解析数据，如果发现数据中有一些静态资源（如CSS、JS或图片），则浏览器又会发起另外的HTTP请求，这些请求很可能会在CDN（content delivery network，内容分发网络，通过在网络各处放置节点服务器，实时的根据网络流量和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上，使得用户可以就近取得所需的内容，解决网络拥挤状况，提高网站响应速度。）上，CDN服务器再处理这个用户请求。</p>
 <p>CDN架构图：<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/CDN%20Framework.jpg" alt="CDN架构图"></p>
 <p>不管上面的网络结构如何变化，一些始终遵循的固定原则：</p>
 <ol>
@@ -192,8 +192,8 @@
 <li>必须基于HTTP与服务端交互。不管访问的数据是在国内的还是在国外，是文本数据还是流媒体（传输过程中使用了流技术的多媒体数据，流技术即把连续的影像和声音信息经过压缩处理后放到网站服务器让用户一边下载一边观看收听，不需要将整个压缩文件都下载下来后才可以使用的网络传输技术），都必须按照统一的HTTP请求的方式，这样服务器端才能正确得知请求的是什么。</li>
 <li>数据的展示必须在浏览器中进行。当用户获取到请求的数据资源后，必须在浏览器上最终解析展示。</li>
 </ol>
-<p>##2 如何发起一个HTTP请求<br>发起一个HTTP请求的过程就是建立一个Socket通信的过程。</p>
-<p>##3 HTTP解析<br>HTTP是B/S架构的核心。要理解HTTP，最重要的是要熟悉HTTP中的<strong>HTTP Header</strong>。</p>
+<h2 id="2-如何发起一个HTTP请求"><a href="#2-如何发起一个HTTP请求" class="headerlink" title="2 如何发起一个HTTP请求"></a>2 如何发起一个HTTP请求</h2><p>发起一个HTTP请求的过程就是建立一个Socket通信的过程。</p>
+<h2 id="3-HTTP解析"><a href="#3-HTTP解析" class="headerlink" title="3 HTTP解析"></a>3 HTTP解析</h2><p>HTTP是B/S架构的核心。要理解HTTP，最重要的是要熟悉HTTP中的<strong>HTTP Header</strong>。</p>
 <p><strong>什么是HTTP协议？</strong><br>HTTP(hypertext transfer protocol，<strong>超文本传输协议</strong>)协议定义了浏览器向WWW服务器<strong>请求数据</strong>以及服务器向浏览器<strong>返回数据</strong>的方法。HTTP协议使用了面向连接的<strong>TCP作为运输层协议</strong>，保证数据的可靠传输，HTTP不考虑数据在传输过程中被丢弃后又怎样重传。<strong>HTTP协议本身是无连接的。</strong>即虽然HTTP使用了TCP连接，但是通信的双方在交换HTTP报文之前不需要先建立HTTP连接。<strong>HTTP协议是无状态的。</strong>即同一个用户第二次访问同一个服务器上的资源时，服务器的响应与第一次被访问时的相同（假定请求的数据在服务器上没有更新）。因为服务器不需要记录曾经请求数据的用户信息，也不需记录为该用户返回过几次数据，所以HTTP的无状态特点简化了服务器的设计，使得服务器更容易支持大量并发的HTTP请求。</p>
 <p>当浏览器向服务器发送get请求时，HTTP协议规定首先要建立浏览器与服务器之间的TCP连接。这样的连接过程需要三次握手，当三次握手的前两部分完成后（即经过一个RTT（round-trip time,往返时间，表示从发送方发送数据开始，到发送方收到来自接收方的确认总共经历的时间，其间接收方收到数据后立刻发送确认）时间后），浏览器就把HTTP请求报文作为三次握手的第三个报文的数据发送给服务器。服务器收到HTTP请求之后，就把所请求的文档作为响应报文返回给客户。<br>请求一个WWW资源所需的时间是<strong>该资源的传输时间（与资源的大小成正比）加上两倍的RTT（一个RTT用于建立TCP连接，另一个RTT用于请求和接受资源）</strong>。这里TCP建立连接的三次握手的第三个报文段中捎带了浏览器对WWW资源的请求。</p>
 <p>请求服务器资源所需时间:<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/time%20cost%20for%20request%20resources%20from%20server.jpg" alt="请求服务器资源所需时间"></p>
@@ -696,11 +696,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MySQL InnoDB</a>
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Paxos 分布式</a>
+                <a href="javascript:void(0)" class="js-tag color3">MySQL InnoDB</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -708,11 +708,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">Paxos 分布式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
