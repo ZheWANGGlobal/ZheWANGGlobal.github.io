@@ -1464,7 +1464,7 @@ mv.Call(args)
 <li>物理文件 (files)</li>
 </ul>
 </blockquote>
-<p><img src="" alt="MySQL infrastructure"><br>存储引擎是基于表的，不是数据库。MySQL区别于其他数据库的最重要的特点是其插件式的表存储器，插件式表存储器架构提供了一系列标准的管理和服务支持，这些标准和存储引擎本身无关，其中一些可能是每个数据库系统必须的，例如SQL分析器与优化器，存储引擎是底层物理结构的实现，其开发实现各不相同。</p>
+<p><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/MySQL%20infrastructure.png" alt="MySQL infrastructure"><br>存储引擎是基于表的，不是数据库。MySQL区别于其他数据库的最重要的特点是其插件式的表存储器，插件式表存储器架构提供了一系列标准的管理和服务支持，这些标准和存储引擎本身无关，其中一些可能是每个数据库系统必须的，例如SQL分析器与优化器，存储引擎是底层物理结构的实现，其开发实现各不相同。</p>
 <h1 id="MySQL表存储引擎"><a href="#MySQL表存储引擎" class="headerlink" title="MySQL表存储引擎"></a>MySQL表存储引擎</h1><p><strong>插件式体系结构</strong>是MySQL数据库独有的，<strong>存储引擎</strong>是MySQL区别于其他数据库的最重要的特性，是MySQL数据库的核心。使用存储引擎的好处是在我们使用MySQL的过程中，能根据具体应用的不同，采用不同特点的存储引擎来建立不同的存储引擎表。<br>MySQL是开源的，我们可以根据MySQL预定义的存储引擎接口编写自己的存储引擎，如果我们对某种存储引擎不满意，也可以修改其源码来实现自己想要的特性。MySQL的存储引擎可以分为官方存储引擎和第三方存储引擎，InnoDB存储引擎就属于第三方存储引擎（Oracle收购）。</p>
 <h2 id="1-InnoDB存储引擎"><a href="#1-InnoDB存储引擎" class="headerlink" title="1 InnoDB存储引擎"></a>1 InnoDB存储引擎</h2><p>InnoDB支持事务，主要<strong>面向在线事务处理(OLTP, online transaction processing)</strong>方面的应用。其特点是<strong>行锁设计、支持外键，支持类似于Oracle的非锁定读（默认情况下读取操作不会产生锁）</strong>。是MySQL在Windows版本下的默认存储引擎，也被默认地包含在所有MySQL二进制的发布版本中。</p>
 <p>InnoDB将数据存放在一个逻辑<strong>表空间</strong>中，这个表空间就像一个黑盒一样由InnoDB自身进行管理。从MySQL4.1版本开始，<strong>每个InnoDB存储引擎的表可以被单独存放到一个独立的ibd文件中。</strong>与Oracle类似，InnoDB存储引擎同样可以使用裸设备（row disk）来建立其表空间。</p>
