@@ -1145,6 +1145,80 @@
 
 
   
+    <article id="post-White-Box-Testing-Logical-Coverage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/21/White-Box-Testing-Logical-Coverage/">White Box Testing-Logical Coverage</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/21/White-Box-Testing-Logical-Coverage/" class="archive-article-date">
+  	<time datetime="2017-05-21T15:04:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　What is white-box testing?<br>　　A method of testing software that tests internal structures or workings of an application, as opposed to its functionality (i.e. black-box testing). In white-box testing an internal perspective of the system, as well as programming skills, are used to design test cases.<br>　　The difference between Black-box Testing and White-box Testing:<br>　　 <img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/whiteBoxTesting%20versus%20BlackBoxTesting.jpg" alt="WhiteBT ver. BBT"><br>Logic Coverage:</p>
+<blockquote>
+<ul>
+<li>1　<strong><em>Statement Coverage</em></strong><br>　　Statement Coverage is to design a number of test cases,making each executable statement implement at least once.</li>
+<li>2　<strong><em>Decision Coverage</em></strong><br>　　To design a number of test cases,make the true and false branches of each judgement may go through at least once.</li>
+<li>3　<strong><em>Conditions Coverage</em></strong><br>　　Conditions Coverage is to design a number of test cases,make possible values of each condition in the procedure may implement at least once.</li>
+<li>4　<strong><em>Condition/Decision Coverage</em></strong><br>　　To design sufficient test cases,make all possible conditions of each judgement implement at least once,and make all possible results of each judgement implement at least once.</li>
+<li>5　<strong><em>Condition Combination Coverage</em></strong><br>　　Condition Combination Coverage is to design sufficient test cases,make all possible condition combinations of each judgement implement at least once.If the test cases meet the condition combination coverage, then they certainly meet the decision coverage, condition coverage and condition/decision coverage.We can use truth table to help us do condition combination coverage.</li>
+<li>6 <strong><em>Path Coverage</em></strong><br>　　To Design enough test cases to cover all possible path in the procedure.</li>
+<li>7　<strong><em>Complete Coverage</em></strong><br>　　Complete Coverage = condition combination coverage + path coverage</li>
+</ul>
+</blockquote>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/21/White-Box-Testing-Logical-Coverage/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-分治法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1192,6 +1266,69 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/10/分治法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Paxos" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/02/Paxos/">Paxos</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/02/Paxos/" class="archive-article-date">
+  	<time datetime="2017-04-02T14:57:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　Mister Lamport’s paper Paxos Made Simple seems to be a really plain explanation of paxos algorithm,and….seriously…I DON’T THINK SO!　Well when I started to doubt my life,I found someone asking such a question on Quora　:<br><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/paxo_quora.png" alt="PaxosQuestiononQuora"><br>　　hahahahahahahhhhhh,I am not the only stupid man on the earth&lt;(￣︶￣)&gt;<br>　　As we all know,consensus is the process of agreeing on one result among a group of participants and this problem becomes difficult when the participants or their communication medium may experience failures.Paxos is a family of protocols for solving consensus in a network of unreliable processors.The algorithm runs in a message-passing model with asynchrony and less than n/2 crash failures.<br>　　There are four roles in paxos algorithm:Client,Acceptor,Proposer,Learner.Paxos describes the actions of the processes by their roles in the protocol.In an typical implementation,a single processor may act as more than one role at the same time.The client issues a request to the distributed system.A Proposer advocates a client request, attempting to convince the Acceptors to agree on it, and acting as a coordinator to move the protocol forward when conflicts occur.Learners act as the replication factor for the protocol. Once a Client request has been agreed on by the Acceptors, the Learner may take action.The Acceptors act as the fault-tolerant “memory” of the protocol and play the role just like a decision maker.So proposers take the request from client to ask acceptor to make decision,acceptors make initial decision:accept or not accept.Then if the initial decision of acceptor is accept,proposer will ask acceptor once again to confirm the decision.And acceptor make final decision:final accept or final reject.The learner will learn from all the acceptors and if most of the acceptors accept the request,the learner will get the final result which it need.This is a typical vote-release process. The learner is the final executor of the request.<br>　　The problem that we are faced with:A collection of processes can propose values(i.e.A write request on a file in a distributed file server),a consensus algorithm ensures that a single one among the proposed values is chosen.There will be one and only one value that can be chosen.If no value is proposed by the processes,then no value should be chosen.If a value has been chosen,then processes should be able to learn the chosen value.<br>　　The safety requirements for consensus are:<br>　　　　(1)　only one value that has been proposed can be chosen.<br>　　　　(2)　only one single value is chosen,and<br>　　　　(3)　a process never learns a value has been chosen unless it actually has been.<br>　　For each proposal,the algorithm proceeds as follws:<br>　　　　(1)　The proposer sends a message prepare(n) to all acceptors.<br>　　　　(2)　Each acceptor compares n to the highest-numbered proposal for which it has responded to a prepare message.If n is greater,it responds with ack(n,v,n_v) where v is the highest-numbered proposal it has accepted and n_v is the number of that proposal.<br>　　　　(3)　The proposer waits to receive ack from a majority of acceptors.If any ack contained a value,it sets v to the most recent value that it received.It then sends accept(n,v) to all acceptors (or just a majority).<br>　　　　(4)　Upon receiving accept(n,v),an acceptor accepts v unless it has already received prepare(n’) for some n’&gt;n.If a majority of acceptors accept the value of a given proposal,that value becomes the decision value of the protocol.<br>　　　　 　　<img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/paxo_theory.png" alt="Paxos Procedure"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/02/Paxos/">展开全文 >></a>
         </p>
       
 
@@ -1465,15 +1602,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Go</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">MySQL InnoDB</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Go</a>
               </li>
             
             <div class="clearfix"></div>
