@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>模式匹配-KMP快速匹配 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
+  <meta name="description" content="朴素匹配的过程中存在回溯，也就是说当匹配过程中出现1　　快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较">
+<meta name="keywords" content="算法数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2018/07/15/模式匹配-朴素匹配/index.html">
+<meta property="og:title" content="模式匹配-KMP快速匹配">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/模式匹配-KMP快速匹配/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
+<meta property="og:description" content="朴素匹配的过程中存在回溯，也就是说当匹配过程中出现1　　快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T04:14:43.205Z">
+<meta property="og:updated_time" content="2018-07-15T04:21:02.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="模式匹配-朴素匹配标签（空格分隔）： 算法数据结构  　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两">
+<meta name="twitter:title" content="模式匹配-KMP快速匹配">
+<meta name="twitter:description" content="朴素匹配的过程中存在回溯，也就是说当匹配过程中出现1　　快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -154,15 +155,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-模式匹配-朴素匹配" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-模式匹配-KMP快速匹配" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      模式匹配-KMP快速匹配
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/模式匹配-KMP快速匹配/" class="archive-article-date">
+  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="模式匹配-朴素匹配"><a href="#模式匹配-朴素匹配" class="headerlink" title="模式匹配-朴素匹配"></a>模式匹配-朴素匹配</h1><p>标签（空格分隔）： 算法数据结构</p>
-<hr>
-<p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>算法比较简单，详细思路见注释。</p>
+        <p>　　朴素匹配的过程中存在回溯，也就是说当匹配过程中出现<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　　快速匹配KMP实现的细节有较多的版本，这边我采用的思路是：t串和p串匹配过程中出现p[i]和t[j]不相等时，用p中以```next[i]```为下标的字符```p[next[i]]```与```t[j]```比较，若```p```中任何字符都不必再与```t[j]```比较，则直接从```t[j+1]```和```p[0]```开始比较，对于任何模式```p```，只要能确定```next[i]（i=0...len_p-1）```，就可以实现快速匹配，当```p[i]!=t[j]```时，直接右移```i-next[i]```个字符，若```next[i]&gt;=0```，则```t[j]```与```p[next[i]]```继续比较，否则从```t[j+1]```与```p[0]```继续比较，理解透彻需要花一点时间，实现如下：</span><br></pre></td></tr></table></figure></p>
+<p>// 快速匹配函数<br>int pMatch(char<em> p,char</em> t,int len_p,int len_t){<br>// t是目标串，p是模式串<br>    int i,j; // i记录p的当前匹配位置，j记录t<br>    i=0 ;j=0; // initialize<br>    while( i&lt;len_p &amp;&amp; j&lt;len_t){<br>    //循环停止条件：模式串能正确匹配到串末或目标串匹配结束，匹配失败<br>        if(p[i]==t[j]||i==-1){ // 考虑next[i]为-1的情况<br>            ++i;++j;  // 继续向后匹配<br>        }else{//下次匹配时，t串从匹配失败的字符开始，p串从next[i]的位置开始<br>            i=next[i];<br>        }<br>    }</p>
+<pre><code>if(i&gt;=len_p)  return j-len_p+1;  // 匹配成功，返回p[0]在t中的位置
+else return 0;
+</code></pre><p>}// next[i]存放的是p[0]…p[i-1]这个字符串中最长相同前后缀子串的长度</p>
+<p>　　执行过程中，j只增不减，j++最多执行len_t次，i++语句最多执行也不超过len_t次，时间代价O(len_t)<br>　　快速匹配的关键在next数组的计算：<br>// 计算next[]数组<br>void makeNext(char<em> p,int len_p,int</em> next){<br>    int i=0,k=-1;  // i指向p当前字符，k是记录next数组中元素的值<br>    next[0]=-1;  // p[0]和t[j]比较不相等，下次仍从p[0]开始比较<br>    while(i &lt; len_p-1 ) { // 计算next[i+1]<br>        while(k&gt;=0 &amp;&amp; p[i]!=p[k])  // next[i]&lt;i,next[k]是p[0]…p[k]最长相同前后缀计算<br>            k=next[k];<br>        i++;k++;<br>        next[i]=k;<br>        /<em><br>            if(p[i]==p[k])  next[i] = next[k];<br>            else next[i]=k;
+        </em>/<br>    }<br>}</p>
+<p><code>`</code><br>　　每执行一次外层循环，i严格增1，故外层循环正好执行len_p-1次，k的值从-1开始k+len_p-1次，并且只有在这一语句中k被增值。在内层循环中，k=next[k]至少使k减少1，所以整个算法中该语句执行次数累计不超过len_p-1次，故内层循环总执行次数最大为m-1。计算next数组的执行时间是O(len_p)。算法总计算时间为O(len_p_+len_t)，相比暴力优化了很多。</p>
 
       
 
@@ -192,6 +212,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -242,7 +273,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/15/模式匹配-朴素匹配/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/15/模式匹配-KMP快速匹配/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -256,15 +287,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/15/模式匹配-KMP快速匹配/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          模式匹配-KMP快速匹配
-        
-      </div>
-    </a>
   
+    <a href="/2018/07/15/模式匹配-朴素匹配/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
