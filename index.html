@@ -144,6 +144,68 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-MySQL体系结构和存储引擎-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/MySQL体系结构和存储引擎-1/">MySQL体系结构和存储引擎</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/MySQL体系结构和存储引擎-1/" class="archive-article-date">
+  	<time datetime="2018-07-15T10:37:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/15/MySQL体系结构和存储引擎-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-模式匹配-KMP快速匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -265,6 +327,101 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/15/模式匹配-朴素匹配/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-MySQL体系结构和存储引擎" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/MySQL体系结构和存储引擎/">MySQL体系结构和存储引擎</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/MySQL体系结构和存储引擎/" class="archive-article-date">
+  	<time datetime="2018-03-15T10:36:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>MySQL是一个<strong>可移植</strong>的数据库，几乎能在当今所有的操作系统上运行，如Linux、Mac、Windows、Solaris、FreeBSD等。各种操作系统在底层实现（如线程）上各不相同，MySQL却<strong>能保证在各平台上物理体系结构的一致性</strong>。</p>
+<p><strong>数据库（database）和实例（instance）的概念</strong><br>数据库：<strong>物理操作系统文件或者其他形式文件类型的集合</strong>。MySQL中，数据库文件可以是<strong>frm、myd、myi和ibd</strong>结尾的文件。使用NDB引擎时，数据库文件可能不是操作系统上的文件，而是存放在内存中的文件。<br>数据库实例：<strong>由数据库后台进程/线程以及一个共享内存区组成</strong>。共享内存可以被数据库后台进程/线程共享。数据库实例是真正用来操作数据库文件的。</p>
+<p><strong>在MySQL中，实例和数据库的关系是一一对应的。在集群状态下可能存在一个数据库被多个实例使用的情况。</strong><br>从概念上说，数据库是<strong>文件（一般来说是二进制文件）的集合</strong>，是由一个个文件组成的，是按照某种数据模型组织起来并存放于二级存储器中的数据集合；数据库实例是<strong>应用程序</strong>，是位于用户与操作系统之间的一层数据管理软件，用户对数据库的任何操作（包括数据库的定义、查询、数据维护、数据库运行控制）都是由数据库实例来完成，其它应用程序只能通过与数据库实例进行交互才能访问数据库。即<strong>要对数据库中的一个个文件进行SELECT、INSERT、UPDATA和DELETE操作，不能直接通过操作文件来更改数据库中的内容，而是要通过数据库实例来完成对数据库的操作。</strong></p>
+<p>MySQL是一个<strong>单进程多线程</strong>结构的数据库。与SQL Server类似，与Oracle多进程的架构不同（Oracle的Windows版本也是单进程多线程架构）。MySQL数据库实例在操作系统上的表现就是一个进程。</p>
+<h1 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h1><p>常见问题：<br>为什么MySQL不支持全文索引？<br>MySQL速度快是因为它不支持事务吗？<br>当表数据量大于1000W时，MySQL的性能会急剧下降吗？</p>
+<p>解决这些问题需要理解MySQL数据库的体系结构。<br>MySQL由以下几个部分组成：</p>
+<blockquote>
+<ul>
+<li>连接池组件(connection pool)</li>
+<li>管理服务和工具组件(Management services and utilities)</li>
+<li>SQL接口组件(SQL interface)</li>
+<li>查询分析组件(parser，解析)</li>
+<li>优化器组件(optimizer)</li>
+<li>缓冲（cache）组件</li>
+<li>插件式存储引擎(pluggable storage engine)</li>
+<li>物理文件 (files)</li>
+</ul>
+</blockquote>
+<p><img src="" alt="MySQL infrastructure"><br>存储引擎是基于表的，不是数据库。MySQL区别于其他数据库的最重要的特点是其插件式的表存储器，插件式表存储器架构提供了一系列标准的管理和服务支持，这些标准和存储引擎本身无关，其中一些可能是每个数据库系统必须的，例如SQL分析器与优化器，存储引擎是底层物理结构的实现，其开发实现各不相同。</p>
+<h1 id="MySQL表存储引擎"><a href="#MySQL表存储引擎" class="headerlink" title="MySQL表存储引擎"></a>MySQL表存储引擎</h1><p><strong>插件式体系结构</strong>是MySQL数据库独有的，<strong>存储引擎</strong>是MySQL区别于其他数据库的最重要的特性，是MySQL数据库的核心。使用存储引擎的好处是在我们使用MySQL的过程中，能根据具体应用的不同，采用不同特点的存储引擎来建立不同的存储引擎表。<br>MySQL是开源的，我们可以根据MySQL预定义的存储引擎接口编写自己的存储引擎，如果我们对某种存储引擎不满意，也可以修改其源码来实现自己想要的特性。MySQL的存储引擎可以分为官方存储引擎和第三方存储引擎，InnoDB存储引擎就属于第三方存储引擎（Oracle收购）。</p>
+<h2 id="1-InnoDB存储引擎"><a href="#1-InnoDB存储引擎" class="headerlink" title="1 InnoDB存储引擎"></a>1 InnoDB存储引擎</h2><p>InnoDB支持事务，主要<strong>面向在线事务处理(OLTP, online transaction processing)</strong>方面的应用。其特点是<strong>行锁设计、支持外键，支持类似于Oracle的非锁定读（默认情况下读取操作不会产生锁）</strong>。是MySQL在Windows版本下的默认存储引擎，也被默认地包含在所有MySQL二进制的发布版本中。</p>
+<p>InnoDB将数据存放在一个逻辑<strong>表空间</strong>中，这个表空间就像一个黑盒一样由InnoDB自身进行管理。从MySQL4.1版本开始，<strong>每个InnoDB存储引擎的表可以被单独存放到一个独立的ibd文件中。</strong>与Oracle类似，InnoDB存储引擎同样可以使用裸设备（row disk）来建立其表空间。</p>
+<p>InnoDB通过<strong>多版本并发控制（MVCC, multi-version concurrency control）来获得高并发性</strong>，而且实现了SQL标准的4中隔离级别，默认为REPEATABLE级别。使用一种next-key locking的策略来避免幻读现象（phantom）的产生。<br>此外，InnoDB还提供了插入缓冲（insert buffer）、二次写（double write）、自适应哈希索引（adaptive hash index）、预读（read ahead）等高性能高可用的功能。<br>对于表中数据的存储，InnoDB采用了聚集（clustered）的方式。该方式类似Oracle的索引聚集表（index organized table, IOT），每张表的存储都按照主键的顺序存放，如果没有显式地在表定义时指定主键，InnoDB会为每一行生成一个6字节的ROWID，以此作为主键。</p>
+<h2 id="2-MyISAM存储引擎"><a href="#2-MyISAM存储引擎" class="headerlink" title="2 MyISAM存储引擎"></a>2 MyISAM存储引擎</h2><p>MyISAM存储引擎是MySQL官方提供的存储引擎。特点是<strong>不支持事务、表锁和全文索引</strong>，<strong>对于一些OLAP（online analytical processing，在线分析处理）操作速度快</strong>。除Windows版本外，MyISAM是所有MySQL的默认存储引擎。<br>MyISAM存储引擎表由MYD和MYI组成，<strong>MYD用来存放数据文件，MYI用来存放索引文件</strong>。可以通过使用myisampack工具来进一步压缩数据文件（压缩后可以用myisampack解压），myisampack使用霍夫曼（Huffman）编码静态算法来压缩数据，所以用它压缩后的表示只读的。<br>在MySQL5.0版本之前，MyISAM默认支持的表大小为4G，如果需要支持大于4G的MyISAM表时，需要指定MAX_ROWS和AVG_ROW_LENGTH属性。从MySQL5.0版本开始，MyISAM默认支持256T的单表数据，足以满足一般需求。</p>
+<p>对于MyISAM存储引擎表，MySQL只缓存其索引文件，数据文件的缓存交由操作系统本身完成，而其他大部分数据库使用LRU算法缓存数据，与MyISAM不同。在MySQL 5.1.23版本之前，无论是在32位还是64位操作系统环境下，缓存索引的缓冲区最大只能设置为4G，之后的版本中，64位操作系统支持大于4G的索引缓冲区。</p>
+<h2 id="3-NDB存储引擎"><a href="#3-NDB存储引擎" class="headerlink" title="3 NDB存储引擎"></a>3 NDB存储引擎</h2><p>NDB存储引擎是一个<strong>集群存储引擎</strong>，类似于Oracle的RAC集群，与RAC share everything结构不同的是，NDB的结构是share nothing的集群结构，能提供更高级别的可用性。NDB的特点是<strong>数据全部放在内存中</strong>（从5.1版本开始，可以将非索引数据放在磁盘上），因此<strong>主键查找</strong>（primary key lookup）速度极快，并且通过添加NDB数据存储节点（data node）可以线性地提高数据库性能，是高可用高性能的集群系统。<br>NDB存储引擎的<strong>连接操作（JOIN）是在MySQL数据库层而不是存储引擎层完成的</strong>。这意味着<strong>复杂的连接操作需要巨大的网络开销，所有查询速度很慢</strong>。</p>
+<h2 id="4-Memory存储引擎"><a href="#4-Memory存储引擎" class="headerlink" title="4 Memory存储引擎"></a>4 Memory存储引擎</h2><p>Memory存储引擎（之前称为HEAP存储引擎）将表中的数据存放在内存中，如果数据库重启或发生崩溃，表中的数据都将消失。Memory非常适用于存储临时数据的临时表和数据仓库中的纬度表。<strong>Memory默认使用哈希索引而不是一般的B+树索引</strong>。<br>Memory存储引擎优点是速度非常快，缺点是只支持表锁，并发性能差；而且不支持TEXT(用来保存字符数据)和BLOB(用来保存二进制数据)列类型；其存储变长字段(varchar)时是按照定长字段(char)的方式进行的，会浪费内存。（eBay的Igor Chernyshev给出了Patch方案）<br>MySQL数据库使用Memory存储引擎作为临时表来存放查询的中间结果集(intermedia result)，如果中间结果集大于Memory存储引擎表的容量设置，或者中间结果集含有TEXT或者BLOB列类型字段，则MySQL数据库会把其转换到MyISAM存储引擎表而存放到磁盘。因为MyISAM不缓存数据文件，所以此时产生的临时表的查询性能会下降。</p>
+<h2 id="5-Archive存储引擎"><a href="#5-Archive存储引擎" class="headerlink" title="5 Archive存储引擎"></a>5 Archive存储引擎</h2><p>Archive存储引擎只支持INSERT和SELECT操作，从MySQL5.1版本开始支持索引。使用zlib算法将数据行(row)进行压缩后存储，压缩比率一般高达1:10。Archive存储引擎非常适合存储归档数据，如日志信息。Archive使用行锁来实现高并发的插入操作，但它本身并不是事务安全的存储引擎，其设计目标主要是提供高速的插入和压缩功能。</p>
+<h2 id="6-Federated存储引擎"><a href="#6-Federated存储引擎" class="headerlink" title="6 Federated存储引擎"></a>6 Federated存储引擎</h2><p>Federated存储引擎表并不存放数据，它只是指向一台远程MySQL数据库服务器上的表，类似于SQL Server的链接服务器和Oracle的透明网关，不同的是当前Federated存储引擎只支持MySQL数据库表，不支持易购数据库表。</p>
+<h2 id="7-Maria存储引擎"><a href="#7-Maria存储引擎" class="headerlink" title="7 Maria存储引擎"></a>7 Maria存储引擎</h2><p>Maria的设计目标是用来取代原有的MyISAM存储引擎，从而成为MySQL的默认存储引擎，它可以看成是MyISAM的后续版本。特点是<strong>缓存数据和索引文件，行锁设计，提供MVCC功能，支持事务和非事务安全的选项支持，更好的BLOB字符类型的处理性能。</strong></p>
+<h2 id="8-其他存储引擎"><a href="#8-其他存储引擎" class="headerlink" title="8 其他存储引擎"></a>8 其他存储引擎</h2><p>上面7种存储之外还有Merge、CSV、Sphinx和Infobright等，它们有各自适用的场景。<br>几个问题的回答：<br>为什么MySQL不支持全文索引？MySQL支持全文索引，MyISAM、Sphinx等存储引擎都支持全文索引。<br>MySQL速度快是因为它不支持事务吗？不是，MySQL中MyISAM存储引擎不支持事务，但是InnoDB支持。速度快要针对不同的应用场景，对于ETL(extract-transform-load, 数据抽取-转换-装载)操作，MyISAM有优势。<br>当表的数据量大于1000W时，MySQL的性能会急剧下降吗？不会，MySQL是数据库，不是文件，随着数据行数的增加，MySQL的性能会有所下降，但是这样的性能下降不是线性的。选择合适的存储引擎和配置，再大的数据量MySQL也能承受。案例：Mytrix在InnoDB上存储了超过1TB的数据；一些网站使用InnoDB存储引擎处理平均每秒800次的插入/更新操作。</p>
+<h1 id="各种存储引擎之间的比较"><a href="#各种存储引擎之间的比较" class="headerlink" title="各种存储引擎之间的比较"></a>各种存储引擎之间的比较</h1><p>存储引擎是MySQL体系结构的核心。<br>不同MySQL存储引擎相关特性比较：<br>|<em>Feature</em>|MyISAM|BDB|Memory|InnoDB|Archive|NDB|<br>|—-|—-|—-|—-|—-|—-|—-|<br>|Storage Limits|No|No|Yes|64TB|No|Yes|<br>|Transactions(commit,rollback,etc.)||Yes||Yes|||<br>|Locking granularity(锁粒度)|Table|Page|Table|Row|Row|Row|<br>|MVCC/Snapshot Read(快照读)||||Yes|Yes|Yes|<br>|Geospatial support(地理空间支持，数据对象定义在几何空间中)|Yes||||||<br>|B-Tree indexes|Yes|Yes|Yes|Yes||Yes|<br>|Hash indexes|||Yes|Yes||Yes|<br>|Full text search index|Yes||||||<br>|Clustered index||||Yes|||<br>|Data Caches|||Yes|Yes||Yes|<br>|Index Caches|Yes||Yes|Yes||Yes|</p>
+<p>MySQL的设计者认为不是所有的应用都需要事务，所以存在不支持事务的存储引擎。可以通过SHOW ENGINES语句查看当前使用的MySQL数据库支持的存储引擎，也可以通过information_schema架构下的ENGINES表来查看。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/15/MySQL体系结构和存储引擎/">展开全文 >></a>
         </p>
       
 

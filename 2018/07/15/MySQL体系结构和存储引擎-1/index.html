@@ -6,20 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>模式匹配-朴素匹配 | Hexo</title>
+  <title>MySQL体系结构和存储引擎 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其">
-<meta name="keywords" content="算法数据结构">
-<meta property="og:type" content="article">
-<meta property="og:title" content="模式匹配-朴素匹配">
-<meta property="og:url" content="http://yoursite.com/2018/07/15/模式匹配-朴素匹配/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="MySQL体系结构和存储引擎">
+<meta property="og:url" content="http://yoursite.com/2018/07/15/MySQL体系结构和存储引擎-1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-15T10:20:18.642Z">
+<meta property="og:updated_time" content="2018-07-15T10:37:12.994Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="模式匹配-朴素匹配">
-<meta name="twitter:description" content="过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其">
+<meta name="twitter:title" content="MySQL体系结构和存储引擎">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -147,29 +143,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-模式匹配-朴素匹配" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL体系结构和存储引擎-1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      模式匹配-朴素匹配
+      MySQL体系结构和存储引擎
     </h1>
   
 
         
-        <a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
-  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+        <a href="/2018/07/15/MySQL体系结构和存储引擎-1/" class="archive-article-date">
+  	<time datetime="2018-07-15T10:37:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度O(len_p*len_t)，详细代码用C实现了一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>算法比较简单，详细思路见注释。</p>
-
+        
       
 
       
@@ -208,17 +202,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -269,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/15/模式匹配-朴素匹配/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/15/MySQL体系结构和存储引擎-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -283,18 +266,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/15/模式匹配-KMP快速匹配/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          模式匹配-KMP快速匹配
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/15/MySQL体系结构和存储引擎/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL体系结构和存储引擎</div>
+    <a href="/2018/07/15/模式匹配-KMP快速匹配/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">模式匹配-KMP快速匹配</div>
       <i class="icon-circle-right"></i>
     </a>
   
