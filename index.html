@@ -144,81 +144,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-模式匹配-朴素匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/15/模式匹配-朴素匹配/">模式匹配-朴素匹配</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
-  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度O(len_p*len_t)，详细代码用C实现了一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>算法比较简单，详细思路见注释。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/15/模式匹配-朴素匹配/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-模式匹配-KMP快速匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -265,6 +190,81 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/07/15/模式匹配-KMP快速匹配/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-模式匹配-朴素匹配" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/15/模式匹配-朴素匹配/">模式匹配-朴素匹配</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/15/模式匹配-朴素匹配/" class="archive-article-date">
+  	<time datetime="2018-07-15T04:16:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>　　过去学习算法的过程一直是断断续续，效果与最初期望的相差甚远，很多常用的基础内容遗忘殆尽。在这个承上启下的学期，始终觉得巩固好基础尤为重要。<br>　　Here comes the question,模式匹配是啥子哇？———— 在一个较长字符串t中查找和一个较短字符串p完全相同的子串的过程。这边的p被称为模式，t自然是目标串。<br>　　朴素匹配的思想是用两个指针分别依次指向目标串和模式串的一个字符，目标串从其第一个字符开始和模式串的第一个字符进行比较，如果目标串当前指向的字符和模式串第一个字符不等，则目标串指针后移，用模式串第一个字符与之继续，如果目标串中当前字符和模式串第一个字符开始匹配，则两指针依次后移挨个匹配，出现对应字符不等的情况则目标串指针回退，回退的字符数是模式串指针移动的次数（出现回溯），再继续让目标串当前字符和模式串第一个字符比较，依次类推，直到匹配成功完整的子串。<br>　　实际编码过程中，定义两个整型变量j,i分别记录目标串和模式串当前指向的字符，函数体的主要部分就是扫一遍目标串，扫描完后检查i是否能够达到p串长度的值，算法复杂度O(len_p*len_t)，详细代码用C实现了一下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 在目标串中找到模式串，则返回模式串首字符在目标串的位置（下标+1），</span><br><span class="line">//找不到返回-1</span><br><span class="line">int match(char* t,char*p,int len_t,int len_p)&#123;  </span><br><span class="line">	int i,j;  // i记录p当前字符下标，j记录t当前字符下标</span><br><span class="line">	i=0;j=0; // initialize</span><br><span class="line">	while(i&lt;len_p &amp;&amp; j&lt;len_t)&#123;</span><br><span class="line">		if(t[j]==p[i])&#123; // 如果匹配成功，继续依次向后匹配</span><br><span class="line">			++j;</span><br><span class="line">			++i;</span><br><span class="line">		&#125;else&#123;  // 如果当前匹配失败</span><br><span class="line">			j = j-i+1; // j退到上次开始匹配p[0]的字符的下一个字符（回溯）</span><br><span class="line">			i=0; // i指向p[0]，准备下次重新匹配</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if (i&gt;=len_p)  return j-len_p+1; // 如果匹配成功，注意这边+1</span><br><span class="line">	else return -1;  // 匹配失败</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法比较简单，详细思路见注释。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/15/模式匹配-朴素匹配/">展开全文 >></a>
         </p>
       
 
@@ -505,8 +505,7 @@
 <li>变量声明的同时赋值： <figure class="highlight plain"><figcaption><span><变量名称> <变量类型> </变量类型></变量名称></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">``` go</span><br><span class="line">    var name string  // 变量的声明</span><br><span class="line">    name=&quot;peter&quot; // 变量的赋值</span><br><span class="line">    </span><br><span class="line">    // 变量声明的同时赋值</span><br><span class="line">    var id int = 9527</span><br><span class="line">    </span><br><span class="line">    // 声明变量并赋值时省略类型，类型由系统推断</span><br><span class="line">    var cardId = 6277</span><br><span class="line">    </span><br><span class="line">    // 变量声明与赋值的最简写法，var关键字和类型都省略了，由系统推断</span><br><span class="line">    d := 456  // :代表了var关键字</span><br></pre></td></tr></table></figure></li>
 </ul>
 </blockquote>
-<p>####多个变量的声明与赋值：</p>
-<blockquote>
+<h4 id="多个变量的声明与赋值："><a href="#多个变量的声明与赋值：" class="headerlink" title="多个变量的声明与赋值："></a>多个变量的声明与赋值：</h4><blockquote>
 <ul>
 <li>全局变量的声明可以使用var()组的方式简写</li>
 <li>全局变量的声明不可以省略var，故不能使用:=的形式，但可以使用并行方式</li>
@@ -524,7 +523,7 @@
 <li>类型转换的格式： <figure class="highlight plain"><figcaption><span>[:]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">``` go</span><br><span class="line">    // 在相互兼容的两种类型之间进行转换</span><br><span class="line">    var a float32 = 1.1</span><br><span class="line">    b := int(a)  // 存在精度的丢失但是两种类型之间是相互兼容的</span><br><span class="line">    </span><br><span class="line">    // 以下语句无法通过编译，因为不是两种相互兼容的类型间的转换</span><br><span class="line">    var c bool = true</span><br><span class="line">    d := int(c)  // 在Go中逻辑型变量与数值型变量之间不兼容</span><br></pre></td></tr></table></figure></li>
 </ul>
 </blockquote>
-<p>####解释下面程序的结果：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> temp <span class="keyword">int</span> = <span class="number">65</span></span><br><span class="line">	b := <span class="keyword">string</span>(temp)</span><br><span class="line">	fmt.Println(b) <span class="comment">// 结果是A，整型转换为字符串时，转换的结果是整型在ASCII码表中对应的字符</span></span><br><span class="line">	<span class="comment">// 如果要转换成对应的字符，可以增加一个包strconv，然后使用strconv.Itoa 将string转换成数字使用strconv.Atoi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="解释下面程序的结果："><a href="#解释下面程序的结果：" class="headerlink" title="解释下面程序的结果："></a>解释下面程序的结果：</h4><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> temp <span class="keyword">int</span> = <span class="number">65</span></span><br><span class="line">	b := <span class="keyword">string</span>(temp)</span><br><span class="line">	fmt.Println(b) <span class="comment">// 结果是A，整型转换为字符串时，转换的结果是整型在ASCII码表中对应的字符</span></span><br><span class="line">	<span class="comment">// 如果要转换成对应的字符，可以增加一个包strconv，然后使用strconv.Itoa 将string转换成数字使用strconv.Atoi</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="Go中常量的声明与赋值："><a href="#Go中常量的声明与赋值：" class="headerlink" title="Go中常量的声明与赋值："></a>Go中常量的声明与赋值：</h1><h4 id="常量的定义："><a href="#常量的定义：" class="headerlink" title="常量的定义："></a>常量的定义：</h4><blockquote>
 <ul>
 <li>常量的值在编译的时候就已经确定</li>
@@ -591,8 +590,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 无限循环形式</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := 1</span><br><span class="line">	for &#123;</span><br><span class="line">		a++</span><br><span class="line">		if a &gt; 3 &#123;</span><br><span class="line">			break</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 类似while循环结构的形式</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := 1</span><br><span class="line">	for a &lt;= 3 &#123;</span><br><span class="line">		a++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// for经典形式</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := 1</span><br><span class="line">	for i := 0; i &lt; 3; i++ &#123;</span><br><span class="line">		a++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>###选择语句switch：</p>
-<blockquote>
+<h3 id="选择语句switch："><a href="#选择语句switch：" class="headerlink" title="选择语句switch："></a>选择语句switch：</h3><blockquote>
 <ul>
 <li>可以使用任何类型或者表达式作为条件语句</li>
 <li>不需要写break，一旦条件符合自动终止</li>
@@ -677,291 +675,119 @@
 <li>make(map[keyType]valueType,cap)，cap表示容量，可以省略</li>
 <li>超出容量时会自动扩容，但尽量使用一个合理的初始值</li>
 <li>使用len()函数获取元素个数</li>
-<li>访问的键不存在时会自动添加该键，如类型为[int]string的map1中没有键1时执行代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;* 使用delete()可以删除键值对</span><br><span class="line">&gt;* 使用for range对map和slice进行迭代操作，类似于其他语言的for each，但是更加高级</span><br></pre></td></tr></table></figure></li>
+<li>访问的键不存在时会自动添加该键，如类型为[int]string的map1中没有键1时执行代码map1[1]=hello,解释器会自动添加键1值为hello的键值对</li>
+<li>使用delete()可以删除键值对</li>
+<li>使用for range对map和slice进行迭代操作，类似于其他语言的for each，但是更加高级</li>
 </ul>
 </blockquote>
-<p>func main() {<br>    var m1 map[int]string = map[int]string{} // 使用map关键字创建一个map，如果省略这里的{}，会导致编译type map[int]string is not an expression错误</p>
-<pre><code>var m2 map[int]string // 也可以分开写，声明和实例化分开      map[int]string这个整体是一种类型，声明map和声明变量的格式本质上是一致的
-m2 = map[int]string{}
-
-fmt.Println(m1) // 运行结果：map[]
-fmt.Println(m2) // 运行结果：map[]
-
-// 省略声明的类型
-var m3 = map[int]string{} // 实例化的大括号不能少
-fmt.Println(m3)           // 运行结果：map[]
-
-// 使用make函数创建map，使用make函数依然要使用map关键字
-var m4 = make(map[int]string, 10)
-fmt.Println(&quot;m4:&quot;, m4) //m4: map[]
-
-// 使用:=同时省略声明的类型和var关键字
-m5 := map[string]string{}
-fmt.Println(m5) // 运行结果：map[]
-
-// 向map中添加元素
-m1[1] = &quot;zhao&quot; // 解释器会自动创建键值对
-m1[2] = &quot;qian&quot;
-m1[3] = &quot;sun&quot;
-fmt.Println(m1) // map[1:zhao 2:qian 3:sun]
-
-// 删除键值对,使用delete()函数
-delete(m1, 2)
-fmt.Println(m1) // map[1:zhao 3:sun]
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 复杂map的操作<br>func main() {<br>    // 使用多个map嵌套的时候要注意每一级的map都要初始化（可以借助多返回值辅助判断是否初始化），如果没有初始化直接使用会导致运行时的错误，编译无法发现<br>    m1 := make(map[int]map[int]string, 10) // value的类型依然是一个map<br>    fmt.Println(m1)<br>    val, ok := m1[1][1]      // 使用Go中的多返回值，第一个返回值是获取的map中的元素，第二个返回值标记该元素所在的map是否存在的布尔值<br>    fmt.Println(m1, val, ok) // m1外层的map已经初始化，但是m1中作为值的内层的map没有经过初始化，所以ok为false<br>    if !ok {<br>        m1[1] = make(map[int]string, 10)<br>    }<br>    m1[1][1] = “hello”<br>    val, ok = m1[1][1]<br>    fmt.Println(m1, val, ok)</p>
-<pre><code>/*
-    map[]
-    map[]  false
-    map[1:map[1:hello]] hello true
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>import (<br>    “fmt”<br>    “sort”   // 导入sort包用于排序<br>)</p>
-<p>func main() {<br>    // 借助slice完成对map的间接排序<br>    m := map[int]string{1: “spring”, 2: “dubbo”, 3: “maven”, 4: “mybatis”, 5: “flask”}<br>    s := make([]int, len(m))<br>    i := 0<br>    for k, _ := range m {<br>        s[i] = k<br>        i++<br>    }<br>    fmt.Println(m, s)<br>    sort.Ints(s)<br>    fmt.Println(s)</p>
-<pre><code>/*
-    map[4:mybatis 5:flask 1:spring 2:dubbo 3:maven] [3 4 5 1 2]
-    [1 2 3 4 5]
-*/
-</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>func main() {<br>    // 使用for range将类型为map[int]string的键和值进行交换，变成类型为map[string]int<br>    m := map[int]string{1: “spring”, 2: “dubbo”, 3: “maven”, 4: “mybatis”, 5: “flask”}<br>    m2 := make(map[string]int, 5)<br>    for k, v := range m {<br>        m2[v] = k<br>    }<br>    fmt.Println(m)<br>    fmt.Println(m2)</p>
-<pre><code>/*
-    map[3:maven 4:mybatis 5:flask 1:spring 2:dubbo]
-    map[spring:1 dubbo:2 maven:3 mybatis:4 flask:5]
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// slice的元素为map，如何进行初始化<br>func main() {<br>    s := make([]map[int]string, 3, 10)<br>    fmt.Println(s) // [map[] map[] map[]]</p>
-<pre><code>/*s[1][1] = &quot;hello&quot;
-fmt.Println(s) // 运行会报 panic: assignment to entry in nil map的错误，因为slice中的map还没有被初始化*/
-
-// 使用for range对元素为map的slice进行初始化
-for i, _ := range s {
-    s[i] = make(map[int]string, 10)
-}
-
-s[1][1] = &quot;hello&quot;
-fmt.Println(s) // [map[] map[1:hello] map[]]
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Go中的函数function</span><br><span class="line">&gt;* Go语言中的函数**不支持**嵌套、重载和默认参数</span><br><span class="line">&gt;* Go中的函数支持以下特性：无需声明原型（C语言中存在函数之间的复杂调用要先声明一下函数的原型再使用函数）、不定长度变参、多返回值、命名返回值参数、匿名函数和闭包</span><br><span class="line">&gt;* Go语言中的匿名函数不能作为顶级函数（最外层函数），只能作为内部函数存在其他函数中</span><br><span class="line">&gt;* 定义函数使用关键字func，且左大括号不能另起一行</span><br><span class="line">&gt;* 函数也可以作为一种类型使用</span><br><span class="line"></span><br><span class="line">#### ps：什么是闭包closure-</span><br><span class="line">#### 一般程序中局部变量都会有一个作用范围scope，闭包就是持续存在的局部变量范围（A closure is a persistent local variable scope），让局部变量能够在正常的scope之外还能存在。那这个范围是多大呢？与绑定的函数的作用范围一致（The scope object, and all its local variables, are tied to the function, and will persist as long as that function persists.）。</span><br></pre></td></tr></table></figure></p>
-<p> // 没有参数和返回值的函数<br>func func1() {</p>
-<p>}</p>
-<p>// 有两个int型参数的函数-原始写法<br>func add(a int, b int) {</p>
-<p>}</p>
-<p>// 有两个int型参数的简写<br>func add2(a, b int) {</p>
-<p>}</p>
-<p>// 有一个int型返回值的函数<br>func getSum(a, b int) int {<br>    return a + b<br>}</p>
-<p>// 有多个返回值的函数<br>func getSumRight(a, b int) (int, bool) {<br>    return a + b, true<br>}</p>
-<p>// 有多个相同类型的返回值，依然可以简写<br>func getSumReturnNums(a, b, c int) (sum, num1, num2, num3 int) { // 多个相同返回值简写时必须要写上返回的变量名，注意加上返回变量名之后函数在运行的时候就会存在相应的局部变量<br>    num1 = a<br>    num2 = b<br>    num3 = c<br>    return a + b + c, num1, num2, num3<br>}</p>
-<p>// 不定长变参的使用方法<br>func variableIndefinite(name string, cardIds …int) { // 注意不定长变参一定要作为函数最后一个参数<br>    fmt.Println(cardIds) // 调用variableIndefinite(“zhe”, 14, 13)时，输出结果为[14 13]，不定长度变参是使用slice来处理的，<br>    //                        特别注意slice是引用类型,slice直接作为函数参数会拷贝slice这个指针（地址的拷贝），会导致外部值的变化，而使用不定长变参本质上是slice中值的拷贝，<br>    //                                                                                在函数内对可变长参数进行修改不会导致外部值的变化<br>}</p>
-<p>// 在函数内需要对非引用类型进行值的修改时：使用取地址符&amp;和指针<em>的形式，与C语言中一致<br>func changeATo2(a </em>int) {<br>    <em>a = 2 // 主函数内 a :=1         changeATo2(&amp;a)    能导致原始a的值的改变，其原因还是因为拷贝的地址，参数传递肯定会带来拷贝，区别就是拷贝的是地址还是值<br>    fmt.Println(</em>a)<br>}</p>
-<p>// Go语言中函数也是类型的例子<br>func funcIsAlsoType() {<br>    fmt.Println(“hello”)<br>    // 主函数中执行下面的语句：<br>    // a:=funcIsAlsoType()<br>    // a()   // 运行结果为 hello，函数可以被赋值，此时a就相当于函数funcIsAlsoType，说明在Go中一切皆类型的思想<br>}</p>
-<p>// Go中的匿名函数<br>func main() {<br>    a := func() {<br>        fmt.Println(“hello”)<br>    }<br>    a() // 也能输出hello,此处就是定义了一个匿名函数，=赋值符号右边的函数没有名称，将等号右边的这个没有名字的函数作为一个函数类型赋值给了a，导致a是这一种类型的一个变量<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>// Go中的闭包<br>func main() {<br>    f := closure(10)<br>    fmt.Println(f(0))<br>    fmt.Println(f(1))<br>    fmt.Println(f(2))</p>
-<pre><code>/*    运行结果:   x的生命周期被延长
-    0xc04204e090
-    0xc04204e090
-    10
-    0xc04204e090
-    11
-    0xc04204e090
-    12
-*/
-</code></pre><p>}</p>
-<p>func closure(x int) func(int) int {<br>    fmt.Printf(“%p\n”, &amp;x)<br>    return func(y int) int {<br>        fmt.Printf(“%p\n”, &amp;x)<br>        return x + y<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 附一段js的闭包例子<br>outer = function() {<br>  var a = 1;<br>  var inner = function() {<br>    console.log(a);<br>  }<br>  return inner; // this returns a function<br>}</p>
-<p>var fnc = outer(); // execute outer to get inner<br>fnc();</p>
-<p>/*<br>Here I have defined a function within a function. The inner function gains access to all the outer function’s local variables, including a. The variable a is in scope for the inner function.</p>
-<p>Normally when a function exits, all its local variables are blown away. However, if we return the inner function and assign it to a variable fnc, so that it persists after outer has exited, all of the variables that were in scope when inner was defined also persist. The variable a has been closed over – it is within a closure.</p>
-<p>Note that the variable a is totally private to fnc. This is a way of creating private variables in a functional programming language such as JavaScript.<br>*/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Go中的defer关键字</span><br><span class="line">&gt;* defer的执行方式类似其他语言中的析构函数，在函数体执行结束后按照调用顺序的**相反顺序**逐个执行</span><br><span class="line">&gt;* 即使函数发生**严重错误**也会执行</span><br><span class="line">&gt;* 支持匿名函数的调用</span><br><span class="line">&gt;* 常用于资源清理、文件关闭、解锁以及记录时间等操作，先定义的defer函数会最后执行，后定义的defer函数会最先执行</span><br><span class="line">&gt;* 通过与匿名函数配合可在return之后修改函数计算结果</span><br><span class="line">&gt;* 如果函数体内某个变量作为defer时匿名函数的参数，则在定义defer时即已经获得了拷贝，否则则是引用某个变量的地址 类似闭包</span><br><span class="line">&gt;* Go没有异常机制（没有try</span><br><span class="line"> catch捕获机制，但有类似finally最终无论如何都要执行的语句），Go中使用panic()/recover()模式来处理错误。具体做法是利用Go中多返回值的特性来得到error类型的返回，在调用这个函数之后进行check(借助defer，因为程序发生panic之后正常的函数都会停止执行，只有defer不管程序是否发生错误它都会执行)，check一下error是否等于nil，不为nil就是发生了错误，以此来判断函数在运行过程中是否发生了错误。</span><br><span class="line"> &gt;* 含有recover的defer函数必须要在recover对应处理的panic之前注册，否则该recover无效</span><br><span class="line">&gt;* Panic可以在任何地方引发，但recover**只有**在defer调用的函数中有效</span><br></pre></td></tr></table></figure></p>
-<p>func main() {<br>    // 直接打印i的值 前面加defer<br>    for i := 0; i &lt; 3; i++ {<br>        defer fmt.Println(i)<br>    }</p>
-<pre><code>/*    运行结果: defer调用是栈的一个结构，先进后出
-    2
-    1
-    0
-
-    i是作为一个参数传进来，是一个值传递
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>func main() {<br>    // 将打印i的值的语句放在匿名函数中，前面加defer<br>    for i := 0; i &lt; 3; i++ {<br>        defer func() {<br>            fmt.Println(i)<br>        }()<br>    }</p>
-<pre><code>/*    运行结果:
-    3
-    3
-    3
-
-    原因是这边相当于一个闭包，i是作为参数是使用的地址，i是作为地址的引用，当程序退出的时候i就变成了局部变量3
-    当main函数return之后开始执行return语句，i就是一直引用的等于3的情况
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>func main() {<br>    A()<br>    B()<br>    C()<br>}</p>
-<p>func A() {<br>    fmt.Println(“function A”)<br>}</p>
-<p>func B() {<br>    panic(“Panic in B”)<br>}</p>
-<p>func C() {<br>    fmt.Println(“function C”)<br>}</p>
-<p>/*    运行结果： 因为触发了panic，所以只执行到了B()函数程序就停止运行了<br>    function A</p>
-<pre><code>panic: Panic in B
-</code></pre><p>*/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>func main() {<br>    // 通过recover()来恢复程序的执行<br>    A()<br>    B()<br>    C()<br>}</p>
-<p>func A() {<br>    fmt.Println(“function A”)<br>}</p>
-<p>func B() {<br>    defer func() { // 这里注意要把这个defer recover的函数写在panic前面，要先注册一下defer函数，否则先运行panic程序就会先退出了<br>        if err := recover(); err != nil { // 使用recover()对程序进行检测恢复，看程序是否引发了panic，recover()的返回值不是nil，则说明引发了panic，是nil说明没有引发panic<br>            fmt.Println(“Recover in B”)<br>        }<br>    }()<br>    panic(“Panic in B”)<br>}</p>
-<p>func C() {<br>    fmt.Println(“function C”)<br>}</p>
-<p>/*    运行结果：<br>    function A<br>    Recover in B<br>    function C</p>
-<p>*/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">![Go中闭包与defer调用例子](https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/Go_closureAndDefer.png)</span><br><span class="line">  &lt;br&gt;</span><br><span class="line"># Go中的结构struct：</span><br><span class="line"> &gt;* Go中的struct和C中的struct非常相似，而且Go没有class，结构承担了Go中面向对象的功能</span><br><span class="line"> &gt;* 使用type &lt;struct name&gt; struct&#123;&#125;的方式定义结构，名称遵循可见性原则(大小写控制public或者private)</span><br><span class="line"> &gt;* 支持指向自身的指针成员，可以使用类似C语言中指针的形式来定义指向结构的指针，并且无论是指向结构的指针还是结构变量本身都可以使用.访问结构中的成员</span><br><span class="line"> &gt;* 支持匿名结构，可用作成员或定义成员变量。既可以有匿名成员变量（此时初始化的顺序要严格按照定义的顺序），也可以有匿名结构作为结构的成员（初始化一定要使用.的形式，不能用&#123;&#125;直接初始化的形式，因为无法得知匿名结构的名称）</span><br><span class="line"> &gt;* 匿名结构也可以用作map的值</span><br><span class="line"> &gt;* 可以使用字面值对结构进行初始化，也就是使用&#123;&#125;中加上值的形式直接进行初始化，不需要另外加上语句使用.来进行初始化</span><br><span class="line"> &gt;* 允许直接通过指针来读写结构体成员（同样的也是直接使用.，不像C中使用-&gt;，因为Go中没有指针运算，Go进行了优化可以直接使用.）</span><br><span class="line"> &gt;* 相同类型的成员可以直接进行赋值拷贝</span><br><span class="line"> &gt;* 支持==和!=比较运算符，但不支持&lt;或&gt;</span><br><span class="line"> &gt;* 支持匿名字段，本质上是定义了以某个类型名为名称的字段</span><br><span class="line"> &gt;* 嵌入结构作为匿名字段看上去像是继承但不是继承，Go中没有继承，使用组合模式作为替代</span><br><span class="line"> &gt;* 可以使用匿名字段指针</span><br><span class="line"> </span><br><span class="line"># Go中的method：</span><br><span class="line"> &gt;* Go中没有class，但是依然有method，写method的形式和写函数类似，就是多了一个receiver接收者的概念，编译器根据receiver来判断该方法属于哪个结构struct</span><br><span class="line"> &gt;* 虽说Go中没有方法重载的概念，但是由于每一个方法都有绑定的receiver，所以不同receiver可以有相同名字的方法，这样就实现了类似重载的功能</span><br><span class="line"> &gt;* 通过显示说明receiver来实现与某个类型的组合</span><br><span class="line"> &gt;* 一个结构中的私有字段（首字母小写）可以被其绑定的方法访问，可见方法拥有较高的访问权限。注意Go中的公有私有是针对package而言的，在同一个package中，私有字段的访问级别相当于公有字段，也就是整个包中都是可见的，对于其他包而言，另一个包中的私有字段就是不可见的了</span><br><span class="line"> &gt;* 只能为同一个包中的类型定义方法</span><br><span class="line"> &gt;* Receiver可以是类型的值或者指针</span><br><span class="line"> &gt;* 不存在方法重载</span><br><span class="line"> &gt;* 可以使用值或者指针来调用方法，编译器会自动完成转换</span><br><span class="line"> &gt;* 从某种意义上来说，方法是函数的语法糖，因为receiver其实就是方法所接受的第一个参数（method value vs. method expression）</span><br><span class="line"> &gt;* 如果从外部结构和嵌入结构存在同名方法，则优先调用外部结构的方法</span><br><span class="line"> &gt;* 类型别名不会拥有底层类型所附带的方法</span><br><span class="line"> &gt;* 方法可以调用结构中非公开的字段</span><br></pre></td></tr></table></figure></p>
-<p>type A struct {<br>    Name string<br>}</p>
-<p>func main() {<br>    v := A{“joe”}<br>    v.Print() // 输出结果joe<br>}</p>
-<p>func (a A) Print() { /<em> 定义方法与定义函数的区别，在方法名前加上参数(recevierName receiverStructType)，这边receiver参数的传递依然遵循指针传递(加上</em>)和值传递的规律*/<br>    fmt.Println(a.Name)<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 一般的类型也可以绑定方法<br>type TZ int</p>
-<p>func main() {<br>    var v TZ = 1<br>    v.Print()<br>    fmt.Println(v)</p>
-<pre><code>/* 运行结果：
-2
-2
-虽然TZ的底层还是int，但是TZ绑定了方法Print(),而int类型并没有绑定该方法(事实上内置类型int也不能够进行方法绑定)，
-这就是在Go中即使底层是相同的类型还是要进行显式转换的原因，因为底层相同的不同类型附带了各自不同的方法，
-所以它们本质上不能等价
-*/
-</code></pre><p>}</p>
-<p>func (a <em>TZ) Print() { // TZ类型绑定了方法Print
-    </em>a = 2<br>    fmt.Println(*a)<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 两种不同的形式来调用类型绑定的方法<br>type TZ int</p>
-<p>func main() {<br>    var v TZ = 1<br>    v.Print()       // 法1 method value<br>    (*TZ).Print(&amp;v) // 法2 method expression</p>
-<pre><code>/* 运行结果：
-2
-2
-*/
-</code></pre><p>}</p>
-<p>func (a <em>TZ) Print() {
-    </em>a = 2<br>    fmt.Println(*a)<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Go中的interface:</span><br><span class="line">&gt;* 接口是一个或者多个方法签名的集合</span><br><span class="line">&gt;* 只要某个类型拥有该接口的所有方法签名，即算实现该接口，无需显式声明实现了哪个接口，这称为structural typing</span><br><span class="line">&gt;* 接口只有方法声明，没有实现，没有数据字段</span><br><span class="line">&gt;* 接口可以匿名嵌入其他接口，或者嵌入到结构中</span><br><span class="line">&gt;* 将对象赋值给接口变量时，会发生拷贝，而接口内部存储的是指向这个复制品的指针，既无法修改复制品的状态，也无法获取指针</span><br><span class="line">&gt;* 只有当接口存储的类型和对象都为nil时，借口才等于nil</span><br><span class="line">&gt;* 接口调用不会做receiver的自动转换，结构调用的时候变量本身和指针都可以自动转换</span><br><span class="line">&gt;* 接口同样支持匿名字段方法</span><br><span class="line">&gt;* 接口也可以实现类似OOP中的多态</span><br><span class="line">&gt;* 空接口可以作为任何类型数据的容器</span><br><span class="line">&gt;* 通过类型的ok-pattern形式可以判断接口中的数据类型</span><br><span class="line">&gt;* 使用type switch则可针对空接口进行比较全面的类型判断</span><br><span class="line">&gt;* 接口可以转换，可以将拥有超集的接口转换成子集的接口</span><br></pre></td></tr></table></figure></p>
-<p>type USB interface {<br>    Name() string<br>    Connect()<br>}</p>
-<p>type PhoneConnecter struct {<br>    name string<br>}</p>
-<p>func (pc PhoneConnecter) Name() string {<br>    return pc.name<br>}</p>
-<p>func (pc PhoneConnecter) Connect() {<br>    fmt.Println(“Connected:”, pc.name)<br>}</p>
-<p>func main() {<br>    var a USB<br>    a = PhoneConnecter{“phoneConnecter”}<br>    a.Connect() // 输出结果：Connected: phoneConnecter<br>    Disconnect(a)<br>}</p>
-<p>func Disconnect(usb USB) {<br>    fmt.Println(“Disconnected:”, usb.Name())<br>}<br>/<em><br>    Connected: phoneConnecter<br>    Disconnected: phoneConnecter
-</em>/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 接口的嵌入<br>type USB interface {<br>    Name() string<br>    Connecter<br>}</p>
-<p>type Connecter interface {<br>    Connect()<br>}</p>
-<p>type PhoneConnecter struct {<br>    name string<br>}</p>
-<p>func (pc PhoneConnecter) Name() string {<br>    return pc.name<br>}</p>
-<p>func (pc PhoneConnecter) Connect() {<br>    fmt.Println(“Connected:”, pc.name)<br>}</p>
-<p>func main() {<br>    var a USB<br>    a = PhoneConnecter{“phoneConnecter”}<br>    a.Connect() // 输出结果：Connected: phoneConnecter<br>    Disconnect(a)<br>}</p>
-<p>func Disconnect(usb USB) {<br>    fmt.Println(“Disconnected:”, usb.Name())<br>}<br>/<em><br>    Connected: phoneConnecter<br>    Disconnected: phoneConnecter
-</em>/<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>type USB interface {<br>    Name() string<br>    Connecter<br>}</p>
-<p>type Connecter interface {<br>    Connect()<br>}</p>
-<p>type PhoneConnecter struct {<br>    name string<br>}</p>
-<p>func (pc PhoneConnecter) Name() string {<br>    return pc.name<br>}</p>
-<p>func (pc PhoneConnecter) Connect() {<br>    fmt.Println(“Connected:”, pc.name)<br>}</p>
-<p>func main() {<br>    var a USB<br>    a = PhoneConnecter{“phoneConnecter”}<br>    a.Connect()<br>    Disconnect(a)<br>}</p>
-<p>func Disconnect(usb USB) {<br>    if pc, ok := usb.(PhoneConnecter); ok { // 判断某变量是否是某类型，依然使用ok pattern的形式<br>        fmt.Println(“Disconnected:”, pc.name)<br>        return<br>    }<br>    fmt.Println(“Unknown device.”)<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 使用空接口传入任何类型（除了接口类型之外，内置类型也可以）,然后使用type switch的形式判断具体是哪个类型<br>type USB interface {<br>    Name() string<br>    Connecter<br>}</p>
-<p>type Connecter interface {<br>    Connect()<br>}</p>
-<p>type PhoneConnecter struct {<br>    name string<br>}</p>
-<p>func (pc PhoneConnecter) Name() string {<br>    return pc.name<br>}</p>
-<p>func (pc PhoneConnecter) Connect() {<br>    fmt.Println(“Connected:”, pc.name)<br>}</p>
-<p>func main() {<br>    var a USB<br>    a = PhoneConnecter{“phoneConnecter”}<br>    a.Connect()<br>    Disconnect(a)<br>}</p>
-<p>func Disconnect(usb interface{}) {<br>    switch v := usb.(type) { // 括号内写type，让系统帮助我们进行判断<br>    case PhoneConnecter:<br>        fmt.Println(“Disconnected:”, v.name)<br>    default:<br>        fmt.Println(“Unknown device.”)<br>    }</p>
-<p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># Go中的反射：</span><br><span class="line">&gt;* 反射可大大提高程序的灵活性，使得interface&#123;&#125;空接口有更大的发挥余地</span><br><span class="line">&gt;* 反射使用TypeOf和ValueOf函数从接口中获取目标对象信息</span><br><span class="line">&gt;* 反射会将匿名字段作为独立字段（匿名字段本质）</span><br><span class="line">&gt;* 想要利用发射修改对象状态，前提是interface.data是settable，即pointer-interface</span><br><span class="line">&gt;* 通过反射可以“动态”调用方法</span><br></pre></td></tr></table></figure></p>
-<p>import (<br>    “fmt”<br>    “reflect”<br>)</p>
-<p>// 使用TypeOf和ValueOf 反射出接口字段的信息和方法的信息<br>type User struct {<br>    Id   int<br>    Name string<br>    Age  int<br>}</p>
-<p>func (u User) Hello() {<br>    fmt.Println(“hello world.”)<br>}</p>
-<p>func main() {<br>    u := User{1, “joe”, 13}<br>    Info(u)<br>}</p>
-<p>func Info(o interface{}) {<br>    t := reflect.TypeOf(o) // 得到空接口对象具体的类型并输出类型<br>    fmt.Println(“Type: “, t.Name())</p>
-<pre><code>v := reflect.ValueOf(o) // 得到空接口对象的所有字段
-fmt.Println(&quot;Fields: &quot;)
-
-// 打印接口对象的所有字段
-for i := 0; i &lt; t.NumField(); i++ {
-    f := t.Field(i)
-    val := v.Field(i).Interface()
-    fmt.Printf(&quot;%6s: %v = %v\n&quot;, f.Name, f.Type, val)
-
-}
-
-for i := 0; i &lt; t.NumMethod(); i++ {
-    m := t.Method(i)
-    fmt.Printf(&quot;%s:%v&quot;, m.Name, m.Type)
-}
-
-/*运行结果：
-Type:  User
-Fields:
-    Id: int = 1
-  Name: string = joe
-   Age: int = 13
-Hello:func(main.User)   // 由此也可以看出receiver是方法的第一个参数
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>type User struct {<br>    Id   int<br>    Name string<br>    Age  int<br>}</p>
-<p>func (u User) Hello() {<br>    fmt.Println(“hello world.”)<br>}</p>
-<p>func main() {<br>    u := User{1, “joe”, 13}<br>    Info(u)<br>}</p>
-<p>func Info(o interface{}) {<br>    t := reflect.TypeOf(o)<br>    fmt.Println(“Type: “, t.Name())</p>
-<pre><code>if k := t.Kind(); k != reflect.Struct { // 使用Kind()来进行类型检查，看能不能使用反射
-    fmt.Println(&quot;类型错误提示&quot;)
-    return
-}
-
-v := reflect.ValueOf(o)
-fmt.Println(&quot;Fields: &quot;)
-
-// 打印接口对象的所有字段
-for i := 0; i &lt; t.NumField(); i++ {
-    f := t.Field(i)
-    val := v.Field(i).Interface()
-    fmt.Printf(&quot;%6s: %v = %v\n&quot;, f.Name, f.Type, val)
-
-}
-
-for i := 0; i &lt; t.NumMethod(); i++ {
-    m := t.Method(i)
-    fmt.Printf(&quot;%s:%v&quot;, m.Name, m.Type)
-}
-
-/*运行结果：
-Type:  User
-Fields:
-    Id: int = 1
-  Name: string = joe
-   Age: int = 13
-Hello:func(main.User)   // 由此也可以看出receiver是方法的第一个参数
-*/
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 使用反射获取嵌套的结构中的字段信息<br>type User struct {<br>    Id   int<br>    Name string<br>    Age  int<br>}</p>
-<p>type Manager struct {<br>    User  /<em>该匿名字段相当于独立字段  User User 也就是说，相当于有一个与类型同名的User字段，所以使用时要以User：User{}的形式</em>/<br>    title string<br>}</p>
-<p>func main() {<br>    m := Manager{User: User{1, “joe”, 32}, title: “coo”}<br>    t := reflect.TypeOf(m)<br>    // 取嵌套的User中的Id字段，通过在FieldByIndex中传入一个int型的slice来取<br>    fmt.Printf(“%#v\n”, t.FieldByIndex([]int{0, 0})) /<em>输出结果：reflect.StructField{Name:”Id”, PkgPath:””, Type:(</em>reflect.rtype)(0x4a82c0), Tag:””, Offset:0x0, Index:[]int{0}, Anonymous:false}*/<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 使用反射修改值<br>func main() {<br>    x := 123<br>    v := reflect.ValueOf(&amp;x) // 这边传入指针pointer interface才能进行修改<br>    v.Elem().SetInt(999)     // 使用Elem()函数获取指向x的指针<br>    fmt.Println(x)           // 输出999<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 使用反射修改目标对象<br>import (<br>    “fmt”<br>    “reflect”<br>)</p>
-<p>type User struct {<br>    Id   int<br>    Name string<br>    Age  int<br>}</p>
-<p>func main() {<br>    u := User{1, “joe”, 23}<br>    Set(&amp;u)        // 既然要修改目标对象u，肯定要传入指针<br>    fmt.Println(u) // 输出结果：{1 john 23} 成功修改了Name字段的值<br>}</p>
-<p>// set函数用于修改目标对象<br>func Set(o interface{}) {<br>    v := reflect.ValueOf(o)</p>
-<pre><code>// 检查传入的参数是否是指针，是指针才可以修改  同时检查元素是否能被修改
-if v.Kind() == reflect.Ptr || !v.Elem().CanSet() {
-    fmt.Println(&quot;对象类型非指针或对象不可被修改&quot;)
-    return
-} else {
-    v = v.Elem() //
-}
-
-f := v.FieldByName(&quot;Name&quot;) // 不仅可以通过index来获取结构的字段，还可以直接通过字段名
-if !f.IsValid() {          // IsValid()用于判断查找的Name字段是否存在
-    fmt.Println(&quot;字段Name不存在&quot;)
-    return
-}
-
-if f.Kind() == reflect.String { // 判断字段类型是否正确
-    f.SetString(&quot;john&quot;) // 调用与字段类型对应的set函数进行修改
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>// 使用反射调用方法 效果就像是方法的动态调用<br>import (<br>    “fmt”<br>    “reflect”<br>)</p>
-<p>type User struct {<br>    Id   int<br>    Name string<br>    Age  int<br>}</p>
-<p>func (u User) Hello(name string) {<br>    fmt.Println(“hello”, name, “,my name is “, u.Name) // 输出结果:hello John ,my name is  joe<br>}</p>
-<p>func main() {<br>    u := User{1, “joe”, 23}</p>
-<pre><code>// 使用反射调用Hello方法，并且传入一个Name字段
-v := reflect.ValueOf(u)       // 得到u的字段及绑定的方法
-mv := v.MethodByName(&quot;Hello&quot;) // 寻找到Hello方法
-
-args := []reflect.Value{reflect.ValueOf(&quot;John&quot;)} // args得到一个slice，作为调用方法的参数
-mv.Call(args)
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>const (<br>    a,b = 1,2<br>    c   // 编译不通过<br>)</p>
-<p>func main() {<br>    fmt.Println(c)<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">const (</span><br><span class="line">	a,b = 1,2</span><br><span class="line">	c,d   // 编译通过，c为1，d为2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(c) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	var m1 map[int]string = map[int]string&#123;&#125; // 使用map关键字创建一个map，如果省略这里的&#123;&#125;，会导致编译type map[int]string is not an expression错误</span><br><span class="line"></span><br><span class="line">	var m2 map[int]string // 也可以分开写，声明和实例化分开      map[int]string这个整体是一种类型，声明map和声明变量的格式本质上是一致的</span><br><span class="line">	m2 = map[int]string&#123;&#125;</span><br><span class="line"></span><br><span class="line">	fmt.Println(m1) // 运行结果：map[]</span><br><span class="line">	fmt.Println(m2) // 运行结果：map[]</span><br><span class="line"></span><br><span class="line">	// 省略声明的类型</span><br><span class="line">	var m3 = map[int]string&#123;&#125; // 实例化的大括号不能少</span><br><span class="line">	fmt.Println(m3)           // 运行结果：map[]</span><br><span class="line"></span><br><span class="line">	// 使用make函数创建map，使用make函数依然要使用map关键字</span><br><span class="line">	var m4 = make(map[int]string, 10)</span><br><span class="line">	fmt.Println(&quot;m4:&quot;, m4) //m4: map[]</span><br><span class="line"></span><br><span class="line">	// 使用:=同时省略声明的类型和var关键字</span><br><span class="line">	m5 := map[string]string&#123;&#125;</span><br><span class="line">	fmt.Println(m5) // 运行结果：map[]</span><br><span class="line"></span><br><span class="line">	// 向map中添加元素</span><br><span class="line">	m1[1] = &quot;zhao&quot; // 解释器会自动创建键值对</span><br><span class="line">	m1[2] = &quot;qian&quot;</span><br><span class="line">	m1[3] = &quot;sun&quot;</span><br><span class="line">	fmt.Println(m1) // map[1:zhao 2:qian 3:sun]</span><br><span class="line"></span><br><span class="line">	// 删除键值对,使用delete()函数</span><br><span class="line">	delete(m1, 2)</span><br><span class="line">	fmt.Println(m1) // map[1:zhao 3:sun]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 复杂map的操作</span><br><span class="line">func main() &#123;</span><br><span class="line">	// 使用多个map嵌套的时候要注意每一级的map都要初始化（可以借助多返回值辅助判断是否初始化），如果没有初始化直接使用会导致运行时的错误，编译无法发现</span><br><span class="line">	m1 := make(map[int]map[int]string, 10) // value的类型依然是一个map</span><br><span class="line">	fmt.Println(m1)</span><br><span class="line">	val, ok := m1[1][1]      // 使用Go中的多返回值，第一个返回值是获取的map中的元素，第二个返回值标记该元素所在的map是否存在的布尔值</span><br><span class="line">	fmt.Println(m1, val, ok) // m1外层的map已经初始化，但是m1中作为值的内层的map没有经过初始化，所以ok为false</span><br><span class="line">	if !ok &#123;</span><br><span class="line">		m1[1] = make(map[int]string, 10)</span><br><span class="line">	&#125;</span><br><span class="line">	m1[1][1] = &quot;hello&quot;</span><br><span class="line">	val, ok = m1[1][1]</span><br><span class="line">	fmt.Println(m1, val, ok)</span><br><span class="line"></span><br><span class="line">	/*</span><br><span class="line">		map[]</span><br><span class="line">		map[]  false</span><br><span class="line">		map[1:map[1:hello]] hello true</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;sort&quot;   // 导入sort包用于排序</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	// 借助slice完成对map的间接排序</span><br><span class="line">	m := map[int]string&#123;1: &quot;spring&quot;, 2: &quot;dubbo&quot;, 3: &quot;maven&quot;, 4: &quot;mybatis&quot;, 5: &quot;flask&quot;&#125;</span><br><span class="line">	s := make([]int, len(m))</span><br><span class="line">	i := 0</span><br><span class="line">	for k, _ := range m &#123;</span><br><span class="line">		s[i] = k</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(m, s)</span><br><span class="line">	sort.Ints(s)</span><br><span class="line">	fmt.Println(s)</span><br><span class="line"></span><br><span class="line">	/*</span><br><span class="line">		map[4:mybatis 5:flask 1:spring 2:dubbo 3:maven] [3 4 5 1 2]</span><br><span class="line">		[1 2 3 4 5]</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	// 使用for range将类型为map[int]string的键和值进行交换，变成类型为map[string]int</span><br><span class="line">	m := map[int]string&#123;1: &quot;spring&quot;, 2: &quot;dubbo&quot;, 3: &quot;maven&quot;, 4: &quot;mybatis&quot;, 5: &quot;flask&quot;&#125;</span><br><span class="line">	m2 := make(map[string]int, 5)</span><br><span class="line">	for k, v := range m &#123;</span><br><span class="line">		m2[v] = k</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(m)</span><br><span class="line">	fmt.Println(m2)</span><br><span class="line"></span><br><span class="line">	/*</span><br><span class="line">		map[3:maven 4:mybatis 5:flask 1:spring 2:dubbo]</span><br><span class="line">		map[spring:1 dubbo:2 maven:3 mybatis:4 flask:5]</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// slice的元素为map，如何进行初始化</span><br><span class="line">func main() &#123;</span><br><span class="line">	s := make([]map[int]string, 3, 10)</span><br><span class="line">	fmt.Println(s) // [map[] map[] map[]]</span><br><span class="line"></span><br><span class="line">	/*s[1][1] = &quot;hello&quot;</span><br><span class="line">	fmt.Println(s) // 运行会报 panic: assignment to entry in nil map的错误，因为slice中的map还没有被初始化*/</span><br><span class="line"></span><br><span class="line">	// 使用for range对元素为map的slice进行初始化</span><br><span class="line">	for i, _ := range s &#123;</span><br><span class="line">		s[i] = make(map[int]string, 10)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	s[1][1] = &quot;hello&quot;</span><br><span class="line">	fmt.Println(s) // [map[] map[1:hello] map[]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Go中的函数function"><a href="#Go中的函数function" class="headerlink" title="Go中的函数function"></a>Go中的函数function</h1><blockquote>
+<ul>
+<li>Go语言中的函数<strong>不支持</strong>嵌套、重载和默认参数</li>
+<li>Go中的函数支持以下特性：无需声明原型（C语言中存在函数之间的复杂调用要先声明一下函数的原型再使用函数）、不定长度变参、多返回值、命名返回值参数、匿名函数和闭包</li>
+<li>Go语言中的匿名函数不能作为顶级函数（最外层函数），只能作为内部函数存在其他函数中</li>
+<li>定义函数使用关键字func，且左大括号不能另起一行</li>
+<li>函数也可以作为一种类型使用</li>
+</ul>
+</blockquote>
+<h4 id="ps：什么是闭包closure"><a href="#ps：什么是闭包closure" class="headerlink" title="ps：什么是闭包closure-"></a>ps：什么是闭包closure-</h4><h4 id="一般程序中局部变量都会有一个作用范围scope，闭包就是持续存在的局部变量范围（A-closure-is-a-persistent-local-variable-scope），让局部变量能够在正常的scope之外还能存在。那这个范围是多大呢？与绑定的函数的作用范围一致（The-scope-object-and-all-its-local-variables-are-tied-to-the-function-and-will-persist-as-long-as-that-function-persists-）。"><a href="#一般程序中局部变量都会有一个作用范围scope，闭包就是持续存在的局部变量范围（A-closure-is-a-persistent-local-variable-scope），让局部变量能够在正常的scope之外还能存在。那这个范围是多大呢？与绑定的函数的作用范围一致（The-scope-object-and-all-its-local-variables-are-tied-to-the-function-and-will-persist-as-long-as-that-function-persists-）。" class="headerlink" title="一般程序中局部变量都会有一个作用范围scope，闭包就是持续存在的局部变量范围（A closure is a persistent local variable scope），让局部变量能够在正常的scope之外还能存在。那这个范围是多大呢？与绑定的函数的作用范围一致（The scope object, and all its local variables, are tied to the function, and will persist as long as that function persists.）。"></a>一般程序中局部变量都会有一个作用范围scope，闭包就是持续存在的局部变量范围（A closure is a persistent local variable scope），让局部变量能够在正常的scope之外还能存在。那这个范围是多大呢？与绑定的函数的作用范围一致（The scope object, and all its local variables, are tied to the function, and will persist as long as that function persists.）。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"> // 没有参数和返回值的函数</span><br><span class="line">func func1() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 有两个int型参数的函数-原始写法</span><br><span class="line">func add(a int, b int) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 有两个int型参数的简写</span><br><span class="line">func add2(a, b int) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 有一个int型返回值的函数</span><br><span class="line">func getSum(a, b int) int &#123;</span><br><span class="line">	return a + b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 有多个返回值的函数</span><br><span class="line">func getSumRight(a, b int) (int, bool) &#123;</span><br><span class="line">	return a + b, true</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 有多个相同类型的返回值，依然可以简写</span><br><span class="line">func getSumReturnNums(a, b, c int) (sum, num1, num2, num3 int) &#123; // 多个相同返回值简写时必须要写上返回的变量名，注意加上返回变量名之后函数在运行的时候就会存在相应的局部变量</span><br><span class="line">	num1 = a</span><br><span class="line">	num2 = b</span><br><span class="line">	num3 = c</span><br><span class="line">	return a + b + c, num1, num2, num3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 不定长变参的使用方法</span><br><span class="line">func variableIndefinite(name string, cardIds ...int) &#123; // 注意不定长变参一定要作为函数最后一个参数</span><br><span class="line">	fmt.Println(cardIds) // 调用variableIndefinite(&quot;zhe&quot;, 14, 13)时，输出结果为[14 13]，不定长度变参是使用slice来处理的，</span><br><span class="line">	//						特别注意slice是引用类型,slice直接作为函数参数会拷贝slice这个指针（地址的拷贝），会导致外部值的变化，而使用不定长变参本质上是slice中值的拷贝，</span><br><span class="line">	//																				在函数内对可变长参数进行修改不会导致外部值的变化</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在函数内需要对非引用类型进行值的修改时：使用取地址符&amp;和指针*的形式，与C语言中一致</span><br><span class="line">func changeATo2(a *int) &#123;</span><br><span class="line">	*a = 2 // 主函数内 a :=1         changeATo2(&amp;a)    能导致原始a的值的改变，其原因还是因为拷贝的地址，参数传递肯定会带来拷贝，区别就是拷贝的是地址还是值</span><br><span class="line">	fmt.Println(*a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Go语言中函数也是类型的例子</span><br><span class="line">func funcIsAlsoType() &#123;</span><br><span class="line">	fmt.Println(&quot;hello&quot;)</span><br><span class="line">	// 主函数中执行下面的语句：</span><br><span class="line">	// a:=funcIsAlsoType()</span><br><span class="line">	// a()   // 运行结果为 hello，函数可以被赋值，此时a就相当于函数funcIsAlsoType，说明在Go中一切皆类型的思想</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Go中的匿名函数</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := func() &#123;</span><br><span class="line">		fmt.Println(&quot;hello&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	a() // 也能输出hello,此处就是定义了一个匿名函数，=赋值符号右边的函数没有名称，将等号右边的这个没有名字的函数作为一个函数类型赋值给了a，导致a是这一种类型的一个变量</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// Go中的闭包</span><br><span class="line">func main() &#123;</span><br><span class="line">	f := closure(10)</span><br><span class="line">	fmt.Println(f(0))</span><br><span class="line">	fmt.Println(f(1))</span><br><span class="line">	fmt.Println(f(2))</span><br><span class="line"></span><br><span class="line">	/*	运行结果:   x的生命周期被延长</span><br><span class="line">		0xc04204e090</span><br><span class="line">		0xc04204e090</span><br><span class="line">		10</span><br><span class="line">		0xc04204e090</span><br><span class="line">		11</span><br><span class="line">		0xc04204e090</span><br><span class="line">		12</span><br><span class="line">	*/</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func closure(x int) func(int) int &#123;</span><br><span class="line">	fmt.Printf(&quot;%p\n&quot;, &amp;x)</span><br><span class="line">	return func(y int) int &#123;</span><br><span class="line">		fmt.Printf(&quot;%p\n&quot;, &amp;x)</span><br><span class="line">		return x + y</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 附一段js的闭包例子</span><br><span class="line">outer = function() &#123;</span><br><span class="line">  var a = 1;</span><br><span class="line">  var inner = function() &#123;</span><br><span class="line">    console.log(a);</span><br><span class="line">  &#125;</span><br><span class="line">  return inner; // this returns a function</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var fnc = outer(); // execute outer to get inner </span><br><span class="line">fnc();</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">Here I have defined a function within a function. The inner function gains access to all the outer function&apos;s local variables, including a. The variable a is in scope for the inner function.</span><br><span class="line"></span><br><span class="line">Normally when a function exits, all its local variables are blown away. However, if we return the inner function and assign it to a variable fnc, so that it persists after outer has exited, all of the variables that were in scope when inner was defined also persist. The variable a has been closed over -- it is within a closure.</span><br><span class="line"></span><br><span class="line">Note that the variable a is totally private to fnc. This is a way of creating private variables in a functional programming language such as JavaScript.</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h1 id="Go中的defer关键字"><a href="#Go中的defer关键字" class="headerlink" title="Go中的defer关键字"></a>Go中的defer关键字</h1><blockquote>
+<ul>
+<li>defer的执行方式类似其他语言中的析构函数，在函数体执行结束后按照调用顺序的<strong>相反顺序</strong>逐个执行</li>
+<li>即使函数发生<strong>严重错误</strong>也会执行</li>
+<li>支持匿名函数的调用</li>
+<li>常用于资源清理、文件关闭、解锁以及记录时间等操作，先定义的defer函数会最后执行，后定义的defer函数会最先执行</li>
+<li>通过与匿名函数配合可在return之后修改函数计算结果</li>
+<li>如果函数体内某个变量作为defer时匿名函数的参数，则在定义defer时即已经获得了拷贝，否则则是引用某个变量的地址 类似闭包</li>
+<li>Go没有异常机制（没有try<br>catch捕获机制，但有类似finally最终无论如何都要执行的语句），Go中使用panic()/recover()模式来处理错误。具体做法是利用Go中多返回值的特性来得到error类型的返回，在调用这个函数之后进行check(借助defer，因为程序发生panic之后正常的函数都会停止执行，只有defer不管程序是否发生错误它都会执行)，check一下error是否等于nil，不为nil就是发生了错误，以此来判断函数在运行过程中是否发生了错误。</li>
+<li>含有recover的defer函数必须要在recover对应处理的panic之前注册，否则该recover无效</li>
+<li>Panic可以在任何地方引发，但recover<strong>只有</strong>在defer调用的函数中有效</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">    // 直接打印i的值 前面加defer</span><br><span class="line">	for i := 0; i &lt; 3; i++ &#123;</span><br><span class="line">		defer fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/*	运行结果: defer调用是栈的一个结构，先进后出</span><br><span class="line">		2</span><br><span class="line">		1</span><br><span class="line">		0</span><br><span class="line">		</span><br><span class="line">		i是作为一个参数传进来，是一个值传递</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	// 将打印i的值的语句放在匿名函数中，前面加defer</span><br><span class="line">	for i := 0; i &lt; 3; i++ &#123;</span><br><span class="line">		defer func() &#123;</span><br><span class="line">			fmt.Println(i)</span><br><span class="line">		&#125;()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/*	运行结果:</span><br><span class="line">		3</span><br><span class="line">		3</span><br><span class="line">		3</span><br><span class="line"></span><br><span class="line">		原因是这边相当于一个闭包，i是作为参数是使用的地址，i是作为地址的引用，当程序退出的时候i就变成了局部变量3</span><br><span class="line">		当main函数return之后开始执行return语句，i就是一直引用的等于3的情况</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	A()</span><br><span class="line">	B()</span><br><span class="line">	C()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func A() &#123;</span><br><span class="line">	fmt.Println(&quot;function A&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func B() &#123;</span><br><span class="line">	panic(&quot;Panic in B&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func C() &#123;</span><br><span class="line">	fmt.Println(&quot;function C&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*	运行结果： 因为触发了panic，所以只执行到了B()函数程序就停止运行了</span><br><span class="line">	function A</span><br><span class="line"></span><br><span class="line">	panic: Panic in B</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">func main() &#123;</span><br><span class="line">	// 通过recover()来恢复程序的执行</span><br><span class="line">	A()</span><br><span class="line">	B()</span><br><span class="line">	C()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func A() &#123;</span><br><span class="line">	fmt.Println(&quot;function A&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func B() &#123;</span><br><span class="line">	defer func() &#123; // 这里注意要把这个defer recover的函数写在panic前面，要先注册一下defer函数，否则先运行panic程序就会先退出了</span><br><span class="line">		if err := recover(); err != nil &#123; // 使用recover()对程序进行检测恢复，看程序是否引发了panic，recover()的返回值不是nil，则说明引发了panic，是nil说明没有引发panic</span><br><span class="line">			fmt.Println(&quot;Recover in B&quot;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;()</span><br><span class="line">	panic(&quot;Panic in B&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func C() &#123;</span><br><span class="line">	fmt.Println(&quot;function C&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*	运行结果：</span><br><span class="line">	function A</span><br><span class="line">	Recover in B</span><br><span class="line">	function C</span><br><span class="line"></span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/ZheWANGGlobal/MarkdownPhotos/master/Go_closureAndDefer.png" alt="Go中闭包与defer调用例子"><br>  <br></p>
+<h1 id="Go中的结构struct："><a href="#Go中的结构struct：" class="headerlink" title="Go中的结构struct："></a>Go中的结构struct：</h1><blockquote>
+<ul>
+<li>Go中的struct和C中的struct非常相似，而且Go没有class，结构承担了Go中面向对象的功能</li>
+<li>使用type <struct name=""> struct{}的方式定义结构，名称遵循可见性原则(大小写控制public或者private)</struct></li>
+<li>支持指向自身的指针成员，可以使用类似C语言中指针的形式来定义指向结构的指针，并且无论是指向结构的指针还是结构变量本身都可以使用.访问结构中的成员</li>
+<li>支持匿名结构，可用作成员或定义成员变量。既可以有匿名成员变量（此时初始化的顺序要严格按照定义的顺序），也可以有匿名结构作为结构的成员（初始化一定要使用.的形式，不能用{}直接初始化的形式，因为无法得知匿名结构的名称）</li>
+<li>匿名结构也可以用作map的值</li>
+<li>可以使用字面值对结构进行初始化，也就是使用{}中加上值的形式直接进行初始化，不需要另外加上语句使用.来进行初始化</li>
+<li>允许直接通过指针来读写结构体成员（同样的也是直接使用.，不像C中使用-&gt;，因为Go中没有指针运算，Go进行了优化可以直接使用.）</li>
+<li>相同类型的成员可以直接进行赋值拷贝</li>
+<li>支持==和!=比较运算符，但不支持&lt;或&gt;</li>
+<li>支持匿名字段，本质上是定义了以某个类型名为名称的字段</li>
+<li>嵌入结构作为匿名字段看上去像是继承但不是继承，Go中没有继承，使用组合模式作为替代</li>
+<li>可以使用匿名字段指针</li>
+</ul>
+</blockquote>
+<h1 id="Go中的method："><a href="#Go中的method：" class="headerlink" title="Go中的method："></a>Go中的method：</h1><blockquote>
+<ul>
+<li>Go中没有class，但是依然有method，写method的形式和写函数类似，就是多了一个receiver接收者的概念，编译器根据receiver来判断该方法属于哪个结构struct</li>
+<li>虽说Go中没有方法重载的概念，但是由于每一个方法都有绑定的receiver，所以不同receiver可以有相同名字的方法，这样就实现了类似重载的功能</li>
+<li>通过显示说明receiver来实现与某个类型的组合</li>
+<li>一个结构中的私有字段（首字母小写）可以被其绑定的方法访问，可见方法拥有较高的访问权限。注意Go中的公有私有是针对package而言的，在同一个package中，私有字段的访问级别相当于公有字段，也就是整个包中都是可见的，对于其他包而言，另一个包中的私有字段就是不可见的了</li>
+<li>只能为同一个包中的类型定义方法</li>
+<li>Receiver可以是类型的值或者指针</li>
+<li>不存在方法重载</li>
+<li>可以使用值或者指针来调用方法，编译器会自动完成转换</li>
+<li>从某种意义上来说，方法是函数的语法糖，因为receiver其实就是方法所接受的第一个参数（method value vs. method expression）</li>
+<li>如果从外部结构和嵌入结构存在同名方法，则优先调用外部结构的方法</li>
+<li>类型别名不会拥有底层类型所附带的方法</li>
+<li>方法可以调用结构中非公开的字段</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">type A struct &#123;</span><br><span class="line">	Name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	v := A&#123;&quot;joe&quot;&#125;</span><br><span class="line">	v.Print() // 输出结果joe</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a A) Print() &#123; /* 定义方法与定义函数的区别，在方法名前加上参数(recevierName receiverStructType)，这边receiver参数的传递依然遵循指针传递(加上*)和值传递的规律*/</span><br><span class="line">	fmt.Println(a.Name)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 一般的类型也可以绑定方法</span><br><span class="line">type TZ int</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var v TZ = 1</span><br><span class="line">	v.Print()</span><br><span class="line">	fmt.Println(v)</span><br><span class="line"></span><br><span class="line">	/* 运行结果：</span><br><span class="line">	2</span><br><span class="line">	2</span><br><span class="line">	虽然TZ的底层还是int，但是TZ绑定了方法Print(),而int类型并没有绑定该方法(事实上内置类型int也不能够进行方法绑定)，</span><br><span class="line">	这就是在Go中即使底层是相同的类型还是要进行显式转换的原因，因为底层相同的不同类型附带了各自不同的方法，</span><br><span class="line">	所以它们本质上不能等价</span><br><span class="line">	*/</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a *TZ) Print() &#123; // TZ类型绑定了方法Print</span><br><span class="line">	*a = 2</span><br><span class="line">	fmt.Println(*a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// 两种不同的形式来调用类型绑定的方法</span><br><span class="line">type TZ int</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var v TZ = 1</span><br><span class="line">	v.Print()       // 法1 method value</span><br><span class="line">	(*TZ).Print(&amp;v) // 法2 method expression</span><br><span class="line"></span><br><span class="line">	/* 运行结果：</span><br><span class="line">	2</span><br><span class="line">	2</span><br><span class="line">	*/</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (a *TZ) Print() &#123;</span><br><span class="line">	*a = 2</span><br><span class="line">	fmt.Println(*a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Go中的interface"><a href="#Go中的interface" class="headerlink" title="Go中的interface:"></a>Go中的interface:</h1><blockquote>
+<ul>
+<li>接口是一个或者多个方法签名的集合</li>
+<li>只要某个类型拥有该接口的所有方法签名，即算实现该接口，无需显式声明实现了哪个接口，这称为structural typing</li>
+<li>接口只有方法声明，没有实现，没有数据字段</li>
+<li>接口可以匿名嵌入其他接口，或者嵌入到结构中</li>
+<li>将对象赋值给接口变量时，会发生拷贝，而接口内部存储的是指向这个复制品的指针，既无法修改复制品的状态，也无法获取指针</li>
+<li>只有当接口存储的类型和对象都为nil时，借口才等于nil</li>
+<li>接口调用不会做receiver的自动转换，结构调用的时候变量本身和指针都可以自动转换</li>
+<li>接口同样支持匿名字段方法</li>
+<li>接口也可以实现类似OOP中的多态</li>
+<li>空接口可以作为任何类型数据的容器</li>
+<li>通过类型的ok-pattern形式可以判断接口中的数据类型</li>
+<li>使用type switch则可针对空接口进行比较全面的类型判断</li>
+<li>接口可以转换，可以将拥有超集的接口转换成子集的接口</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">type USB interface &#123;</span><br><span class="line">	Name() string</span><br><span class="line">	Connect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PhoneConnecter struct &#123;</span><br><span class="line">	name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Name() string &#123;</span><br><span class="line">	return pc.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Connect() &#123;</span><br><span class="line">	fmt.Println(&quot;Connected:&quot;, pc.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a USB</span><br><span class="line">	a = PhoneConnecter&#123;&quot;phoneConnecter&quot;&#125;</span><br><span class="line">	a.Connect() // 输出结果：Connected: phoneConnecter</span><br><span class="line">	Disconnect(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Disconnect(usb USB) &#123;</span><br><span class="line">	fmt.Println(&quot;Disconnected:&quot;, usb.Name())</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">    Connected: phoneConnecter</span><br><span class="line">	Disconnected: phoneConnecter</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// 接口的嵌入</span><br><span class="line">type USB interface &#123;</span><br><span class="line">	Name() string</span><br><span class="line">	Connecter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Connecter interface &#123;</span><br><span class="line">	Connect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PhoneConnecter struct &#123;</span><br><span class="line">	name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Name() string &#123;</span><br><span class="line">	return pc.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Connect() &#123;</span><br><span class="line">	fmt.Println(&quot;Connected:&quot;, pc.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a USB</span><br><span class="line">	a = PhoneConnecter&#123;&quot;phoneConnecter&quot;&#125;</span><br><span class="line">	a.Connect() // 输出结果：Connected: phoneConnecter</span><br><span class="line">	Disconnect(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Disconnect(usb USB) &#123;</span><br><span class="line">	fmt.Println(&quot;Disconnected:&quot;, usb.Name())</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">    Connected: phoneConnecter</span><br><span class="line">	Disconnected: phoneConnecter</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">type USB interface &#123;</span><br><span class="line">	Name() string</span><br><span class="line">	Connecter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Connecter interface &#123;</span><br><span class="line">	Connect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PhoneConnecter struct &#123;</span><br><span class="line">	name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Name() string &#123;</span><br><span class="line">	return pc.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Connect() &#123;</span><br><span class="line">	fmt.Println(&quot;Connected:&quot;, pc.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a USB</span><br><span class="line">	a = PhoneConnecter&#123;&quot;phoneConnecter&quot;&#125;</span><br><span class="line">	a.Connect()</span><br><span class="line">	Disconnect(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Disconnect(usb USB) &#123;</span><br><span class="line">	if pc, ok := usb.(PhoneConnecter); ok &#123; // 判断某变量是否是某类型，依然使用ok pattern的形式</span><br><span class="line">		fmt.Println(&quot;Disconnected:&quot;, pc.name)</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(&quot;Unknown device.&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 使用空接口传入任何类型（除了接口类型之外，内置类型也可以）,然后使用type switch的形式判断具体是哪个类型</span><br><span class="line">type USB interface &#123;</span><br><span class="line">	Name() string</span><br><span class="line">	Connecter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Connecter interface &#123;</span><br><span class="line">	Connect()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type PhoneConnecter struct &#123;</span><br><span class="line">	name string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Name() string &#123;</span><br><span class="line">	return pc.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (pc PhoneConnecter) Connect() &#123;</span><br><span class="line">	fmt.Println(&quot;Connected:&quot;, pc.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	var a USB</span><br><span class="line">	a = PhoneConnecter&#123;&quot;phoneConnecter&quot;&#125;</span><br><span class="line">	a.Connect()</span><br><span class="line">	Disconnect(a)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Disconnect(usb interface&#123;&#125;) &#123;</span><br><span class="line">	switch v := usb.(type) &#123; // 括号内写type，让系统帮助我们进行判断</span><br><span class="line">	case PhoneConnecter:</span><br><span class="line">		fmt.Println(&quot;Disconnected:&quot;, v.name)</span><br><span class="line">	default:</span><br><span class="line">		fmt.Println(&quot;Unknown device.&quot;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Go中的反射："><a href="#Go中的反射：" class="headerlink" title="Go中的反射："></a>Go中的反射：</h1><blockquote>
+<ul>
+<li>反射可大大提高程序的灵活性，使得interface{}空接口有更大的发挥余地</li>
+<li>反射使用TypeOf和ValueOf函数从接口中获取目标对象信息</li>
+<li>反射会将匿名字段作为独立字段（匿名字段本质）</li>
+<li>想要利用发射修改对象状态，前提是interface.data是settable，即pointer-interface</li>
+<li>通过反射可以“动态”调用方法 </li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// 使用TypeOf和ValueOf 反射出接口字段的信息和方法的信息</span><br><span class="line">type User struct &#123;</span><br><span class="line">	Id   int</span><br><span class="line">	Name string</span><br><span class="line">	Age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u User) Hello() &#123;</span><br><span class="line">	fmt.Println(&quot;hello world.&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;1, &quot;joe&quot;, 13&#125;</span><br><span class="line">	Info(u)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Info(o interface&#123;&#125;) &#123;</span><br><span class="line">	t := reflect.TypeOf(o) // 得到空接口对象具体的类型并输出类型</span><br><span class="line">	fmt.Println(&quot;Type: &quot;, t.Name())</span><br><span class="line"></span><br><span class="line">	v := reflect.ValueOf(o) // 得到空接口对象的所有字段</span><br><span class="line">	fmt.Println(&quot;Fields: &quot;)</span><br><span class="line"></span><br><span class="line">	// 打印接口对象的所有字段</span><br><span class="line">	for i := 0; i &lt; t.NumField(); i++ &#123;</span><br><span class="line">		f := t.Field(i)</span><br><span class="line">		val := v.Field(i).Interface()</span><br><span class="line">		fmt.Printf(&quot;%6s: %v = %v\n&quot;, f.Name, f.Type, val)</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; t.NumMethod(); i++ &#123;</span><br><span class="line">		m := t.Method(i)</span><br><span class="line">		fmt.Printf(&quot;%s:%v&quot;, m.Name, m.Type)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/*运行结果：</span><br><span class="line">	Type:  User</span><br><span class="line">	Fields:</span><br><span class="line">	    Id: int = 1</span><br><span class="line">	  Name: string = joe</span><br><span class="line">	   Age: int = 13</span><br><span class="line">	Hello:func(main.User)   // 由此也可以看出receiver是方法的第一个参数</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">type User struct &#123;</span><br><span class="line">	Id   int</span><br><span class="line">	Name string</span><br><span class="line">	Age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u User) Hello() &#123;</span><br><span class="line">	fmt.Println(&quot;hello world.&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;1, &quot;joe&quot;, 13&#125;</span><br><span class="line">	Info(u)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func Info(o interface&#123;&#125;) &#123;</span><br><span class="line">	t := reflect.TypeOf(o)</span><br><span class="line">	fmt.Println(&quot;Type: &quot;, t.Name())</span><br><span class="line"></span><br><span class="line">	if k := t.Kind(); k != reflect.Struct &#123; // 使用Kind()来进行类型检查，看能不能使用反射</span><br><span class="line">		fmt.Println(&quot;类型错误提示&quot;)</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	v := reflect.ValueOf(o)</span><br><span class="line">	fmt.Println(&quot;Fields: &quot;)</span><br><span class="line"></span><br><span class="line">	// 打印接口对象的所有字段</span><br><span class="line">	for i := 0; i &lt; t.NumField(); i++ &#123;</span><br><span class="line">		f := t.Field(i)</span><br><span class="line">		val := v.Field(i).Interface()</span><br><span class="line">		fmt.Printf(&quot;%6s: %v = %v\n&quot;, f.Name, f.Type, val)</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; t.NumMethod(); i++ &#123;</span><br><span class="line">		m := t.Method(i)</span><br><span class="line">		fmt.Printf(&quot;%s:%v&quot;, m.Name, m.Type)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/*运行结果：</span><br><span class="line">	Type:  User</span><br><span class="line">	Fields:</span><br><span class="line">	    Id: int = 1</span><br><span class="line">	  Name: string = joe</span><br><span class="line">	   Age: int = 13</span><br><span class="line">	Hello:func(main.User)   // 由此也可以看出receiver是方法的第一个参数</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 使用反射获取嵌套的结构中的字段信息</span><br><span class="line">type User struct &#123;</span><br><span class="line">	Id   int</span><br><span class="line">	Name string</span><br><span class="line">	Age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Manager struct &#123;</span><br><span class="line">	User  /*该匿名字段相当于独立字段  User User 也就是说，相当于有一个与类型同名的User字段，所以使用时要以User：User&#123;&#125;的形式*/</span><br><span class="line">	title string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	m := Manager&#123;User: User&#123;1, &quot;joe&quot;, 32&#125;, title: &quot;coo&quot;&#125;</span><br><span class="line">	t := reflect.TypeOf(m)</span><br><span class="line">	// 取嵌套的User中的Id字段，通过在FieldByIndex中传入一个int型的slice来取</span><br><span class="line">	fmt.Printf(&quot;%#v\n&quot;, t.FieldByIndex([]int&#123;0, 0&#125;)) /*输出结果：reflect.StructField&#123;Name:&quot;Id&quot;, PkgPath:&quot;&quot;, Type:(*reflect.rtype)(0x4a82c0), Tag:&quot;&quot;, Offset:0x0, Index:[]int&#123;0&#125;, Anonymous:false&#125;*/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 使用反射修改值</span><br><span class="line">func main() &#123;</span><br><span class="line">	x := 123</span><br><span class="line">	v := reflect.ValueOf(&amp;x) // 这边传入指针pointer interface才能进行修改</span><br><span class="line">	v.Elem().SetInt(999)     // 使用Elem()函数获取指向x的指针</span><br><span class="line">	fmt.Println(x)           // 输出999</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 使用反射修改目标对象</span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type User struct &#123;</span><br><span class="line">	Id   int</span><br><span class="line">	Name string</span><br><span class="line">	Age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;1, &quot;joe&quot;, 23&#125;</span><br><span class="line">	Set(&amp;u)        // 既然要修改目标对象u，肯定要传入指针</span><br><span class="line">	fmt.Println(u) // 输出结果：&#123;1 john 23&#125; 成功修改了Name字段的值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// set函数用于修改目标对象</span><br><span class="line">func Set(o interface&#123;&#125;) &#123;</span><br><span class="line">	v := reflect.ValueOf(o)</span><br><span class="line"></span><br><span class="line">	// 检查传入的参数是否是指针，是指针才可以修改  同时检查元素是否能被修改</span><br><span class="line">	if v.Kind() == reflect.Ptr || !v.Elem().CanSet() &#123;</span><br><span class="line">		fmt.Println(&quot;对象类型非指针或对象不可被修改&quot;)</span><br><span class="line">		return</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		v = v.Elem() //</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	f := v.FieldByName(&quot;Name&quot;) // 不仅可以通过index来获取结构的字段，还可以直接通过字段名</span><br><span class="line">	if !f.IsValid() &#123;          // IsValid()用于判断查找的Name字段是否存在</span><br><span class="line">		fmt.Println(&quot;字段Name不存在&quot;)</span><br><span class="line">		return</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if f.Kind() == reflect.String &#123; // 判断字段类型是否正确</span><br><span class="line">		f.SetString(&quot;john&quot;) // 调用与字段类型对应的set函数进行修改</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 使用反射调用方法 效果就像是方法的动态调用</span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type User struct &#123;</span><br><span class="line">	Id   int</span><br><span class="line">	Name string</span><br><span class="line">	Age  int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u User) Hello(name string) &#123;</span><br><span class="line">	fmt.Println(&quot;hello&quot;, name, &quot;,my name is &quot;, u.Name) // 输出结果:hello John ,my name is  joe</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;1, &quot;joe&quot;, 23&#125;</span><br><span class="line"></span><br><span class="line">	// 使用反射调用Hello方法，并且传入一个Name字段</span><br><span class="line">	v := reflect.ValueOf(u)       // 得到u的字段及绑定的方法</span><br><span class="line">	mv := v.MethodByName(&quot;Hello&quot;) // 寻找到Hello方法</span><br><span class="line"></span><br><span class="line">	args := []reflect.Value&#123;reflect.ValueOf(&quot;John&quot;)&#125; // args得到一个slice，作为调用方法的参数</span><br><span class="line">	mv.Call(args)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">	a,b = 1,2</span><br><span class="line">	c   // 编译不通过</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(c) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const (</span><br><span class="line">	a,b = 1,2</span><br><span class="line">	c,d   // 编译通过，c为1，d为2</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(c) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><br></p>
 <h4 id="定义常量时等号右侧必须是常量或者常量表达式的经典例子：-1"><a href="#定义常量时等号右侧必须是常量或者常量表达式的经典例子：-1" class="headerlink" title="定义常量时等号右侧必须是常量或者常量表达式的经典例子："></a>定义常量时等号右侧必须是常量或者常量表达式的经典例子：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">var val = &quot;arrive&quot; // 全局变量</span><br><span class="line"></span><br><span class="line">const (</span><br><span class="line">	a = len(val)  </span><br><span class="line">	// 运行时会报错：const initializer len(val) is not a constant，因为编译的时候并不存在一个字符串叫val</span><br><span class="line">	b = &apos;e&apos;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const (</span><br><span class="line">    val = &quot;arrive&quot;</span><br><span class="line">	a = len(val)  // 可以编译通过并运行</span><br><span class="line">	b = &apos;e&apos;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1016,7 +842,7 @@ mv.Call(args)
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 类似while循环结构的形式</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := 1</span><br><span class="line">	for a &lt;= 3 &#123;</span><br><span class="line">		a++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// for经典形式</span><br><span class="line">func main() &#123;</span><br><span class="line">	a := 1</span><br><span class="line">	for i := 0; i &lt; 3; i++ &#123;</span><br><span class="line">		a++</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="选择语句switch："><a href="#选择语句switch：" class="headerlink" title="选择语句switch："></a>选择语句switch：</h3><blockquote>
+<h3 id="选择语句switch：-1"><a href="#选择语句switch：-1" class="headerlink" title="选择语句switch："></a>选择语句switch：</h3><blockquote>
 <ul>
 <li>可以使用任何类型或者表达式作为条件语句</li>
 <li>不需要写break，一旦条件符合自动终止</li>
